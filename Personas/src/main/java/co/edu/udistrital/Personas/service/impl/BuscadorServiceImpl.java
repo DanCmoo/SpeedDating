@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 public class BuscadorServiceImpl implements BuscadorService {
     @Autowired
     private BuscadorRepository buscadorRepository;
+
     @Override
     public void crearBuscador(Buscador buscador) {
         buscadorRepository.save(buscador);
-
     }
 
     @Override
@@ -24,7 +24,7 @@ public class BuscadorServiceImpl implements BuscadorService {
     @Override
     public void actualizarBuscador(String cedula, Buscador buscador) {
         Buscador buscadorDB = buscadorRepository.findById(cedula).orElse(null);
-        if(buscadorDB!=null){
+        if (buscadorDB != null) {
             buscadorDB.setNombre(buscador.getNombre());
             buscadorDB.setApellido(buscador.getApellido());
             buscadorDB.setEdad(buscador.getEdad());
@@ -35,9 +35,15 @@ public class BuscadorServiceImpl implements BuscadorService {
             buscadorDB.setIdentidad(buscador.getIdentidad());
             buscadorDB.setCorreo(buscador.getCorreo());
             buscadorDB.setTelefono(buscador.getTelefono());
-            buscadorDB.setGustos(buscador.getGustos());
+            buscadorDB.setGustoContextura(buscador.getGustoContextura());
+            buscadorDB.setGustoEdad(buscador.getGustoEdad());
+            buscadorDB.setGustoEstatura(buscador.getGustoEstatura());
+            buscadorDB.setGustoIdentidad(buscador.getGustoIdentidad());
+            buscadorDB.setGustoInteres(buscador.getGustoInteres());
             buscadorDB.setPago(buscador.isPago());
+            buscadorRepository.save(buscadorDB);
         }
+
 
     }
 

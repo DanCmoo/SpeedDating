@@ -19,7 +19,7 @@ public class Persona {
     private float estatura;
     private String profesion;
     private String contextura;
-    private Estado estado;
+    private String estado;
     private String identidad;
     private String correo;
     private String telefono;

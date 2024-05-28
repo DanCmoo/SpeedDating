@@ -10,7 +10,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "buscadores")
 public class Buscador extends Persona{
-    private String[] gustos;
+    private String gustoContextura;
+    private String gustoInteres;
+    private float gustoEstatura;
+    private String gustoIdentidad;
+    private int gustoEdad;
 
 
 }

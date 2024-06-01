@@ -1,11 +1,14 @@
 package co.edu.udistrital.Personas.controller;
 
 import co.edu.udistrital.Personas.entity.Buscador;
+import co.edu.udistrital.Personas.entity.Persona;
 import co.edu.udistrital.Personas.service.BuscadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 
@@ -46,6 +49,19 @@ public class BuscadorController {
     public ResponseEntity<String> eliminarBuscador(@PathVariable String cedula) {
         buscadorService.eliminarBuscador(cedula);
         return ResponseEntity.ok("Se eliminó al buscador con éxito");
+    }
+
+    @GetMapping("/listar")
+    public List<Buscador> listar(){
+        return buscadorService.listar();
+    }
+    @GetMapping("/listar/{criterio}")
+    public ResponseEntity<List<Buscador>> listarPorCriterio(@PathVariable String criterio,@RequestParam float estatura){
+        List<Buscador> buscadores = buscadorService.listarPorEstatura(estatura);
+        if(buscadores.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(buscadores);
     }
 
 }

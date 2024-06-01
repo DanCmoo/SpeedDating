@@ -1,6 +1,6 @@
-package Service.impl;
-import Service.iServicioCorreo;
-import Service.models.ModeloCorreo;
+package co.edu.udistrital.Comunicacion.Service.impl;
+import co.edu.udistrital.Comunicacion.Service.iServicioCorreo;
+import co.edu.udistrital.Comunicacion.models.ModeloCorreo;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,7 +20,7 @@ public class ServicioCorreoimpl implements iServicioCorreo {
     }
     @Override
     public void enviarCorreo(ModeloCorreo correo) throws MessagingException {
-        if (correo.getCita()!=""){
+        if (!(correo.getCita() ==null)){
             MimeMessage mensaje=javaMailSender.createMimeMessage();
             MimeMessageHelper helper=new MimeMessageHelper(mensaje,true,"UTF-8");
             helper.setTo(correo.getCorreoBuscador());

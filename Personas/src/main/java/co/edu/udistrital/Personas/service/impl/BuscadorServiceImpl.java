@@ -6,6 +6,8 @@ import co.edu.udistrital.Personas.service.BuscadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BuscadorServiceImpl implements BuscadorService {
     @Autowired
@@ -51,5 +53,15 @@ public class BuscadorServiceImpl implements BuscadorService {
     public void eliminarBuscador(String cedula) {
         buscadorRepository.deleteById(cedula);
 
+    }
+
+    @Override
+    public List<Buscador> listar() {
+        return buscadorRepository.findAll();
+    }
+
+    @Override
+    public List<Buscador> listarPorEstatura(float estatura) {
+        return buscadorRepository.findByEstatura(estatura);
     }
 }

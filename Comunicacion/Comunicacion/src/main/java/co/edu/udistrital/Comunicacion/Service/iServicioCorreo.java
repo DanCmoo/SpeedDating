@@ -1,8 +1,7 @@
-package Service;
+package co.edu.udistrital.Comunicacion.Service;
 
-import Service.models.ModeloCorreo;
+import co.edu.udistrital.Comunicacion.models.ModeloCorreo;
 import jakarta.mail.MessagingException;
-import org.springframework.stereotype.Service;
 
 
 public interface iServicioCorreo {

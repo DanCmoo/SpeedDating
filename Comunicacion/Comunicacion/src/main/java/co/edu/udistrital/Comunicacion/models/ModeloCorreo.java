@@ -11,10 +11,7 @@ public class ModeloCorreo {
     private String correoBuscador;
     private String nombrePostulante;
     private String correoPostulante;
-    private String cita;
     private String telefonoBuscador;
     private String telefonoPostulante;
-    private String mensaje;
-
 
 }

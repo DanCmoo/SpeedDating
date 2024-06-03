@@ -65,11 +65,13 @@
     <div class="content">
         <h1 th:text="'Hola ' + ${nombreDestinatario} + ','"></h1>
         <p th:text="${mensaje}"></p>
-        <p>Es de nuestro agrado informarte que <span th:text="${nombreInteresado}"></span> está interesado(a) en entablar una amistad contigo. Sus datos de contacto son:</p>
+        <p>Es de nuestro agrado informarte que <span th:text="${nombreInteresado}"></span> está interesado(a) en entablar una relacion de amor contigo. Sus datos de contacto son:</p>
         <p class="datos-contacto">
             Correo: <span th:text="${correoInteresado}"></span><br>
             Teléfono: <span th:text="${telefonoInteresado}"></span>
         </p>
+        <br>
+        <p>Esperamos agenden una segunda cita y se sigan conociendo, gracias por confiar en nosotros</p>
     </div>
     <div class="footer">
         <p>&copy; 2024 SpeedDating. Todos los derechos reservados.</p>

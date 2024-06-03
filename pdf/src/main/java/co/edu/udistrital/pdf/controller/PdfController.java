@@ -1,4 +1,4 @@
-package co.edu.udistrital.pdf.Controller;
+package co.edu.udistrital.pdf.controller;
 
 import co.edu.udistrital.pdf.services.iCitaService;
 import org.springframework.beans.factory.annotation.Autowired;

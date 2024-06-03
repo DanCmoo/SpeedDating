@@ -1,0 +1,1 @@
+const btnNuevaCita = document.querySelector("#nuevaCita");;

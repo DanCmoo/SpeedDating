@@ -1,0 +1,103 @@
+
+body {
+    font-family: Trebuchet MS, sans-serif;
+    margin: 0;
+    background-color: #d8d8d8;
+    padding: 0;
+}
+
+
+header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    padding: 0 20px;
+}
+
+.logo{
+    display: flex;
+}
+
+.logo img{
+    height: 50px;
+}
+
+nav .menu_horizontal {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+}
+
+nav .menu_horizontal li {
+    position: relative;
+    width: 200px;
+    margin: 0;
+}
+
+nav .menu_horizontal li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.icon{
+     margin-left: auto;
+     display: flex;
+     align-items: center;
+}
+
+.icon h1{
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.icon img{
+    height: 40px;
+}
+
+nav .menu_horizontal li a:hover, nav .menu_horizontal li:hover > a {
+    background-color: #e5e5e5;
+    border-radius: 2px;
+}
+
+.menu_vertical{
+    position: absolute;
+    display: none;
+    list-style: none;
+    width: 100%; /* Ajustar según sea necesario */
+    background-color: white; /* Corregir error de propiedad */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    margin: 0;
+    top: 100%; /* Alinea el menú vertical debajo del menú horizontal */
+    left: 0; /* Alinea el menú vertical con el borde izquierdo del elemento principal */
+}
+
+.menu_horizontal li:hover .menu_vertical{
+    display: block;
+}
+
+div{
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+footer {
+    background-color: #333333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

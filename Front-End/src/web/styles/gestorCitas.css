@@ -1,0 +1,132 @@
+body {
+    font-family: Trebuchet MS, sans-serif;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 0 20px;
+    height: 50px;
+    justify-content: start;
+}
+
+.logo img {
+    max-height: 50px;
+    width: auto;
+}
+
+header h1 {
+    margin-left: 10px;
+    color: black;
+    font-size: 30px;
+}
+
+.icon {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    margin-right: 5px;
+}
+
+.botonNuevo {
+    background-color: #e3067d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    width: 150px;
+    top: 63px;
+    left: 80%;
+    align-items: center;
+}
+
+.botonNuevo:hover {
+    background-color: #f3acce;
+}
+
+.filter{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.filter label{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.filter input{
+    padding: 5px 10px;
+    border: 2px solid #e3067d;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    width: 20%;
+}
+
+.filter input:focus{
+    border-color: #f3acce;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #e3067d;
+    margin: 20px 0;
+}
+
+.tableContainer {
+    margin: 20px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #dddddd;
+    min-width: 150px;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333333;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#modal{
+    max-width: 1000px;
+}
+
+#modal::backdrop{
+    background-color: rgba(0,0,0,.55);
+}

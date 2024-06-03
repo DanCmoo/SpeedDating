@@ -10,4 +10,5 @@ import java.util.List;
 public interface BuscadorRepository extends JpaRepository<Buscador,String> {
     List<Buscador> findByEstatura(float estatura);
 
+
 }

@@ -25,14 +25,14 @@ public class CitaServiceimpl implements iCitaService {
         List<Cita> citaList = citaRepository.findAll();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        try{
-            PdfWriter writer=new PdfWriter(out);
-            PdfDocument pdf= new PdfDocument(writer);
-            Document document=new Document(pdf);
+        try {
+            PdfWriter writer = new PdfWriter(out);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
             document.add(new Paragraph("Listado de Citas"));
-            Table table= new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
+            Table table = new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
             table.addHeaderCell("Nombre Buscador");
-            table.addHeaderCell("Puntuacion Cuscador");
+            table.addHeaderCell("Puntuacion Buscador");
             table.addHeaderCell("Nombre Postulante");
             table.addHeaderCell("Puntuación postulante");
             for (Cita cita : citaList) {
@@ -44,7 +44,7 @@ public class CitaServiceimpl implements iCitaService {
             document.add(table);
             document.close();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }

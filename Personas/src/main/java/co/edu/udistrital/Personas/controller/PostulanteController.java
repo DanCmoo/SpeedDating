@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/postulante")
 public class PostulanteController {
@@ -48,5 +50,10 @@ public class PostulanteController {
     public ResponseEntity<String> eliminarPostulante(@PathVariable String cedula) {
         postulanteService.eliminarPostulante(cedula);
         return ResponseEntity.ok("Se eliminó al postulante con éxito");
+    }
+
+    @GetMapping("/listar")
+    public List<Postulante> listarPostulantes(){
+        return postulanteService.listar();
     }
 }

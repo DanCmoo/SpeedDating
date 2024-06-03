@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Entity
 public class Cita {
-    private long id;
+    private Long id;
     private String buscador;
     private String Postulante;
     private String calificacionCitaBuscador;

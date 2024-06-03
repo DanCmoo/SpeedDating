@@ -4,6 +4,6 @@ import java.io.ByteArrayInputStream;
 
 public interface iCitaService {
 
-        ByteArrayInputStream generatePdf();
+    ByteArrayInputStream generatePdf();
 
 }

@@ -7,6 +7,8 @@ import co.edu.udistrital.Personas.service.PostulanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostulanteServiceImpl implements PostulanteService {
 
@@ -48,5 +50,10 @@ public class PostulanteServiceImpl implements PostulanteService {
     public void eliminarPostulante(String cedula) {
         postulanteRepository.deleteById(cedula);
 
+    }
+
+    @Override
+    public List<Postulante> listar() {
+        return postulanteRepository.findAll();
     }
 }

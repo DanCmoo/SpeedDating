@@ -121,3 +121,46 @@ function enviarBuscador() {
             console.error('Error:', error); // Manejar los errores de la solicitud
         });
     }
+
+function listarBuscadores() {
+    fetch('http://localhost:8081/buscador/listar')
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error al listar buscadores');
+            }
+        })
+        .then(data => {
+            // Limpiar la tabla antes de agregar los nuevos datos
+            const tablaBuscadores = document.getElementById('tablaBuscadores');
+            tablaBuscadores.innerHTML = '';
+
+            // Iterar sobre los datos recibidos y agregar filas a la tabla
+            data.forEach(buscador => {
+                const nuevaFila = tablaBuscadores.insertRow();
+                nuevaFila.innerHTML = `
+                    <td>Aquí podrías agregar botones para editar/eliminar</td>
+                    <td>${buscador.pago}</td>
+                    <td>${buscador.nombre}</td>
+                    <td>${buscador.apellido}</td>
+                    <td>${buscador.cedula}</td>
+                    <td>${buscador.edad}</td>
+                    <td>${buscador.estatura}</td>
+                    <td>${buscador.profesion}</td>
+                    <td>${buscador.contextura}</td>
+                    <td>${buscador.estado}</td>
+                    <td>${buscador.identidad}</td>
+                    <td>${buscador.correo}</td>
+                    <td>${buscador.telefono}</td>
+                    <td>${buscador.gustoContextura}</td>
+                    <td>${buscador.gustoInteres}</td>
+                    <td>${buscador.gustoEstatura}</td>
+                    <td>${buscador.gustoIdentidad}</td>
+                    <td>${buscador.gustoEdad}</td>
+                `;
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });

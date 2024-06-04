@@ -74,7 +74,7 @@
                                 ¿Registra pago?
                             </label>
 
-                            <select class="formbold-form-select" name="registroPago" id="registroPago">
+                            <select class="formbold-form-select" name="pago" id="registroPago">
                                 <option value="si">Sí</option>
                                 <option value="no">No</option>
                             </select>
@@ -84,10 +84,11 @@
                             <label for="name" class="formbold-form-label"> Nombre </label>
                             <input
                                     type="text"
-                                    name="name"
+                                    name="nombre"
                                     id="name"
                                     placeholder="Escriba el nombre"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -95,10 +96,11 @@
                             <label for="lastname" class="formbold-form-label"> Apellido </label>
                             <input
                                     type="text"
-                                    name="lastname"
+                                    name="apellido"
                                     id="lastname"
                                     placeholder="Escriba el apellido"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -110,6 +112,7 @@
                                     id="cedula"
                                     placeholder="Escriba la cedula"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -136,11 +139,14 @@
                         <div class="formbold-input-group">
                             <label for="estatura" class="formbold-form-label"> Estatura </label>
                             <input
-                                    type="text"
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
                                     name="estatura"
                                     id="estatura"
                                     placeholder="Escriba la estatura en metros"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -148,10 +154,11 @@
                             <label for="p_o" class="formbold-form-label"> Profesión u oficio </label>
                             <input
                                     type="text"
-                                    name="p_o"
+                                    name="profesion"
                                     id="p_o"
                                     placeholder="Escriba la profesión u oficio"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -163,6 +170,7 @@
                                     id="contextura"
                                     placeholder="Escriba la contextura"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -171,7 +179,7 @@
                                 Estado civil
                             </label>
 
-                            <select class="formbold-form-select" name="estadoCivil" id="estadoCivil">
+                            <select class="formbold-form-select" name="estado" id="estadoCivil">
                                 <option value="soltero">Soltero</option>
                                 <option value="separado">Separado</option>
                                 <option value="viudo">Viudo</option>
@@ -183,21 +191,24 @@
                             <label for="genero" class="formbold-form-label"> Género </label>
                             <input
                                     type="text"
-                                    name="genero"
+                                    name="identidad"
                                     id="genero"
                                     placeholder="Escriba el género"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
                         <div class="formbold-input-group">
-                            <label for="email" class="formbold-form-label"> Correo </label>
+                            <label for="email" class="formbold-form-label"> Correo (Unicamente Gmail)</label>
                             <input
                                     type="email"
-                                    name="email"
+                                    name="correo"
                                     id="email"
+                                    pattern=".+@gmail\.com"
                                     placeholder="Escriba el correo"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -205,10 +216,12 @@
                             <label for="telefono" class="formbold-form-label"> Teléfono </label>
                             <input
                                     type="tel"
+                                    pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                                     name="telefono"
                                     id="telefono"
                                     placeholder="Escriba el teléfono"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -220,6 +233,7 @@
                                     id="gustoContextura"
                                     placeholder="Escriba el gusto de contextura"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -231,17 +245,21 @@
                                     id="gustoInteres"
                                     placeholder="Escriba el gusto de interés"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
                         <div class="formbold-input-group">
                             <label for="gustoEstatura" class="formbold-form-label"> Gusto de estatura </label>
                             <input
-                                    type="text"
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
                                     name="gustoEstatura"
                                     id="gustoEstatura"
                                     placeholder="Escriba el gusto de estatura"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
@@ -249,17 +267,19 @@
                             <label for="gustoGenero" class="formbold-form-label"> Gusto de género </label>
                             <input
                                     type="text"
-                                    name="gustoGenero"
+                                    name="gustoIdentidad"
                                     id="gustoGenero"
                                     placeholder="Escriba el gusto de género"
                                     class="formbold-form-input"
+                                    required
                             />
                         </div>
 
                         <div class="formbold-input-group">
                             <label for="gustoEdad" class="formbold-form-label"> Gusto de edad </label>
                             <input
-                                    type="text"
+                                    type="number"
+                                    min="18"
                                     name="gustoEdad"
                                     id="gustoEdad"
                                     placeholder="Escriba el gusto de edad"
@@ -268,7 +288,7 @@
                         </div>
 
 
-                        <button  type="submit" class="formbold-btn" id="guardarForm" >Guardar</button>
+                        <button  type="submit" class="formbold-btn" id="guardarForm"  onclick="enviarBuscador()">Guardar</button>
                     </form>
                 </div>
             </div>

@@ -5,6 +5,8 @@ import co.edu.udistrital.Comunicacion.Service.impl.ServicioCorreoimpl;
 import co.edu.udistrital.Comunicacion.models.ModeloCorreo;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +26,7 @@ public class ControlCorreo {
         try{
             servicioCorreo.enviarCorreo(correo);
         }catch (MessagingException ex){
-            return ResponseEntity.ok("me mori");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo");
         }
 
         return ResponseEntity.ok("Correo enviado correctamente");
@@ -35,7 +37,7 @@ public class ControlCorreo {
         try{
             servicioCorreoAmor.enviarCorreo(correo);
         }catch (MessagingException ex){
-            return ResponseEntity.ok("me mori");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo");
         }
 
         return ResponseEntity.ok("Correo enviado correctamente");

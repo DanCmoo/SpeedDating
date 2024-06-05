@@ -71,6 +71,8 @@ public class CitaServiceimpl implements iCitaService {
 
 
                 document.add(table);
+                document.add(table2);
+                document.add(table3);
                 document.close();
 
             } catch (Exception e) {

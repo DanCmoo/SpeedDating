@@ -32,9 +32,9 @@ public class CitaServiceimpl implements iCitaService {
                 Document document = new Document(pdf);
                 document.add(new Paragraph("Listado de Citas Amistad"));
                 Table table = new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
-                document.add(new Paragraph("Listado de Citas Mas que amistad"));
+
                 Table table2=new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
-                document.add(new Paragraph("Listado de Citas No conexion"));
+
                 Table table3=new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
                 table.addHeaderCell("Nombre Buscador");
                 table.addHeaderCell("Puntuacion Buscador");
@@ -71,7 +71,9 @@ public class CitaServiceimpl implements iCitaService {
 
 
                 document.add(table);
+                document.add(new Paragraph("Listado de Citas Mas que amistad"));
                 document.add(table2);
+                document.add(new Paragraph("Listado de Citas No conexion"));
                 document.add(table3);
                 document.close();
 

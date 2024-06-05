@@ -47,13 +47,18 @@ public class BuscadorController {
 
     @DeleteMapping("/{cedula}")
     public ResponseEntity<String> eliminarBuscador(@PathVariable String cedula) {
-        buscadorService.eliminarBuscador(cedula);
-        return ResponseEntity.ok("Se eliminó al buscador con éxito");
+        if(!buscadorService.eliminarBuscador(cedula)){
+            return ResponseEntity.ok("Se eliminó al buscador con éxito");
+        }else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("No se pudo eliminar al buscador");
+        }
+
     }
 
     @GetMapping("/listar")
-    public List<Buscador> listar(){
-        return buscadorService.listar();
+    public ResponseEntity<List<Buscador>> listar(){
+
+        return ResponseEntity.ok(buscadorService.listar());
     }
     @GetMapping("/listar/{criterio}")
     public ResponseEntity<List<Buscador>> listarPorCriterio(@PathVariable String criterio,@RequestParam float estatura){

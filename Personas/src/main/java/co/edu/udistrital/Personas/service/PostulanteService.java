@@ -9,6 +9,6 @@ public interface PostulanteService {
     void crearPostulante(Postulante postulante);
     Postulante consultarPostulante(String cedula);
     void actualizarPostulante(String cedula,Postulante postulante);
-    void eliminarPostulante(String cedula);
+    boolean eliminarPostulante(String cedula);
     List<Postulante> listar();
 }

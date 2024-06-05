@@ -17,10 +17,14 @@ public class Cita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String buscador;
+    @Column(name = "cedulaBuscador")
     private String cedulaBuscador;
+    @Column(name = "calificacionBuscador")
     private String calificacionBuscador;
     private String postulante;
+    @Column(name = "cedulaPostulante")
     private String cedulaPostulante;
+    @Column(name = "calificacionPostulante")
     private String calificacionPostulante;
     private String fecha;
     private String calificacion;

@@ -9,6 +9,6 @@ import lombok.*;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Postulante extends Persona{
-    private String interesPrincipal;
+    private String interes;
     private boolean disponibilidad;
 }

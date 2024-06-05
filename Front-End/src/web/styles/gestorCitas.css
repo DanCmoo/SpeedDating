@@ -130,3 +130,20 @@ tbody tr:nth-child(even) {
 #modal::backdrop{
     background-color: rgba(0,0,0,.55);
 }
+#calendar-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.fc-header-toolbar {
+/*
+the calendar will be butting up against the edges,
+but let's scoot in the header's buttons
+*/
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}

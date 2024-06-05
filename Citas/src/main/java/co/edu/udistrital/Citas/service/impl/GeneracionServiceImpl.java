@@ -6,7 +6,9 @@ import co.edu.udistrital.Citas.entity.Postulante;
 import co.edu.udistrital.Citas.service.GeneracionService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +48,12 @@ public class GeneracionServiceImpl implements GeneracionService {
     @Override
     public List<Cita> calificarCitas(List<Cita> citas) {
         String[] calificacion = {"No conexión", "Amistad", "Más que amistad"};
-        Random random = new Random();
+        Random randomBuscador = new Random(23);
+        Random randomPostulante = new Random(369);
         for (Cita cita : citas) {
-            String calificacionBuscador = calificacion[random.nextInt(3)];
+            String calificacionBuscador = calificacion[randomBuscador.nextInt(3)];
             cita.setCalificacionBuscador(calificacionBuscador);
-            String calificacionPostulante = calificacion[random.nextInt(3)];
+            String calificacionPostulante = calificacion[randomPostulante.nextInt(3)];
             cita.setCalificacionPostulante(calificacionPostulante);
             if (calificacionPostulante.equals(calificacionBuscador)) {
                 cita.setCalificacion(calificacionBuscador);
@@ -64,13 +67,27 @@ public class GeneracionServiceImpl implements GeneracionService {
 
     @Override
     public List<Cita> asignarHorarios(List<Cita> citas) {
-        LocalDateTime horarioInicial = LocalDateTime.now();
-        for(Cita cita : citas){
+        LocalDate currentDate = LocalDate.now().plusDays(1); // Comenzar desde el día siguiente al actual
+        LocalTime startTime = LocalTime.of(8, 0); // Comenzar a las 8:00 AM
+        LocalTime endTime = LocalTime.of(17, 0); // Terminar a las 5:00 PM
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        LocalDateTime horarioInicial = LocalDateTime.of(currentDate, startTime);
+
+        for (Cita cita : citas) {
             int i = 0;
-            LocalDateTime horarioCita = horarioInicial.plusMinutes(i*10);
-            String fecha = horarioCita.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            cita.setFecha(fecha);
+            LocalDateTime horarioCita = horarioInicial;
+
+            // Encuentra la próxima hora disponible para la cita
+            while (horarioCita.toLocalTime().isAfter(endTime) || horarioCita.toLocalTime().equals(endTime)) {
+                currentDate = currentDate.plusDays(1);
+                horarioCita = LocalDateTime.of(currentDate, startTime);
+            }
+
+            cita.setFecha(horarioCita.format(formatter));
+            horarioInicial = horarioCita.plusMinutes(10);
         }
+
         return citas;
     }
 }

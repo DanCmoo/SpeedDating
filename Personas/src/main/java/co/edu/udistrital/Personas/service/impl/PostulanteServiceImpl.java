@@ -40,15 +40,16 @@ public class PostulanteServiceImpl implements PostulanteService {
             postulanteDB.setCorreo(postulante.getCorreo());
             postulanteDB.setTelefono(postulante.getTelefono());
             postulanteDB.setPago(postulante.isPago());
-            postulanteDB.setInteresPrincipal(postulante.getInteresPrincipal());
+            postulanteDB.setInteres(postulante.getInteres());
             postulanteDB.setDisponibilidad(postulante.isDisponibilidad());
 
         }
     }
 
     @Override
-    public void eliminarPostulante(String cedula) {
+    public boolean eliminarPostulante(String cedula) {
         postulanteRepository.deleteById(cedula);
+        return postulanteRepository.existsById(cedula);
 
     }
 

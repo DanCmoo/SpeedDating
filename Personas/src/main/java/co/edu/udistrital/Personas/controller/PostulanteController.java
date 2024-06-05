@@ -48,8 +48,13 @@ public class PostulanteController {
 
     @DeleteMapping("/{cedula}")
     public ResponseEntity<String> eliminarPostulante(@PathVariable String cedula) {
-        postulanteService.eliminarPostulante(cedula);
-        return ResponseEntity.ok("Se eliminó al postulante con éxito");
+        if(!postulanteService.eliminarPostulante(cedula)){
+            return ResponseEntity.ok("Se eliminó al postulante con éxito");
+        }else{
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("No se pudo eliminar al postulante");
+        }
+
+
     }
 
     @GetMapping("/listar")

@@ -8,7 +8,7 @@ public interface BuscadorService {
     void crearBuscador(Buscador buscador);
     Buscador consultarBuscador(String cedula);
     void actualizarBuscador(String cedula,Buscador buscador);
-    void eliminarBuscador(String cedula);
+    boolean eliminarBuscador(String cedula);
     List<Buscador> listar();
     List<Buscador> listarPorEstatura(float estatura);
 

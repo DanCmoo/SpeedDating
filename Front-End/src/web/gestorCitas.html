@@ -5,6 +5,8 @@
     <link rel="shortcut icon" href="images/icon_page.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="styles/gestorCitas.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
+
     <title>Citas - Admin</title>
 </head>
 <body>
@@ -19,38 +21,22 @@
     <main >
         <div class="filter">
             <label for="search"> Buscar: </label>
-            <input type="search" name="" id="search" placeholder="Buscar por código de cita">
+            <input type="search" name="" id="search" placeholder="Buscar por cedula de buscador">
         </div>
         <hr>
-        <button type="button" id="nuevaCita" class="botonNuevo">
+        <button type="button" id="nuevaCita" class="botonNuevo" onclick="generarCitas()">
             <span class="material-symbols-outlined">
                 add_circle
             </span>
-            Nueva cita
+            Generar Citas
         </button>
-
-        <div class="tableContainer">
-            <table id="tablaPostulantes" border="1">
-                <thead>
-                <tr class="heading">
-                    <th>Acción</th>
-                    <th>ID de cita</th>
-                    <th>Fecha</th>
-                    <th>Buscador</th>
-                    <th>Postulante</th>
-                    <th>Calificación del buscador</th>
-                    <th>Calificación del postulante</th>
-                    <th>Calificación final</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="body">
-
-                </tr>
-
-                </tbody>
-            </table>
+        <div id='calendar-container'>
+            <div id='calendar'></div>
         </div>
+
+
+
     </main>
+    <script src="scripts/gestorCitas.js"></script>
 </body>
 </html>

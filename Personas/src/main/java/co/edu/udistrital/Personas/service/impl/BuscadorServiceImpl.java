@@ -50,8 +50,9 @@ public class BuscadorServiceImpl implements BuscadorService {
     }
 
     @Override
-    public void eliminarBuscador(String cedula) {
+    public boolean eliminarBuscador(String cedula) {
         buscadorRepository.deleteById(cedula);
+        return buscadorRepository.existsById(cedula);
 
     }
 

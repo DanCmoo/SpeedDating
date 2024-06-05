@@ -34,6 +34,8 @@ public class CitaServiceimpl implements iCitaService {
                 Table table = new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
                 document.add(new Paragraph("Listado de Citas Mas que amistad"));
                 Table table2=new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
+                document.add(new Paragraph("Listado de Citas No conexion"));
+                Table table3=new Table(UnitValue.createPercentArray(4)).useAllAvailableWidth();
                 table.addHeaderCell("Nombre Buscador");
                 table.addHeaderCell("Puntuacion Buscador");
                 table.addHeaderCell("Nombre Postulante");
@@ -42,19 +44,30 @@ public class CitaServiceimpl implements iCitaService {
                 table2.addHeaderCell("Puntuacion Buscador");
                 table2.addHeaderCell("Nombre Postulante");
                 table2.addHeaderCell("Puntuación postulante");
-                for (Cita cita : citaList) {
-                    if (cita.getCalificacion() == "amistad"){
-                        table.addCell(cita.getBuscador());
-                        table.addCell(cita.getCalificacionBuscador());
-                        table.addCell(cita.getPostulante());
-                        table.addCell(cita.getCalificacionPostulante());
-                    }else{
-                        table.addCell(cita.getBuscador());
-                        table.addCell(cita.getCalificacionBuscador());
-                        table.addCell(cita.getPostulante());
-                        table.addCell(cita.getCalificacionPostulante());
+                table3.addHeaderCell("Nombre Buscador");
+                table3.addHeaderCell("Puntuacion Buscador");
+                table3.addHeaderCell("Nombre Postulante");
+                table3.addHeaderCell("Puntuación postulante");
 
-                }}
+                for (Cita cita : citaList) {
+                    if (cita.getCalificacion() == "Amistad"){
+                        table.addCell(cita.getBuscador());
+                        table.addCell(cita.getCalificacionBuscador());
+                        table.addCell(cita.getPostulante());
+                        table.addCell(cita.getCalificacionPostulante());
+                    }else if(cita.getCalificacion()=="Más que amistad") {
+                        table2.addCell(cita.getBuscador());
+                        table2.addCell(cita.getCalificacionBuscador());
+                        table2.addCell(cita.getPostulante());
+                        table2.addCell(cita.getCalificacionPostulante());
+                    }else{
+                            table3.addCell(cita.getBuscador());
+                            table3.addCell(cita.getCalificacionBuscador());
+                            table3.addCell(cita.getPostulante());
+                            table3.addCell(cita.getCalificacionPostulante());
+
+                        }
+                }
 
 
                 document.add(table);

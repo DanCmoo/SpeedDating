@@ -16,21 +16,35 @@ public class BuscadorServiceImpl implements BuscadorService {
     @Autowired
     private BuscadorRepository buscadorRepository;
 
-    // Método para crear un nuevo Buscador
+    /**
+     * Crea un nuevo buscador y lo guarda en la base de datos.
+     *
+     * @param buscador El objeto Buscador a crear.
+     */
     @Override
     public void crearBuscador(Buscador buscador) {
         // Guarda el nuevo buscador en la base de datos
         buscadorRepository.save(buscador);
     }
 
-    // Método para consultar un Buscador por su cédula
+    /**
+     * Consulta un buscador por su número de cédula.
+     *
+     * @param cedula El número de cédula del buscador a consultar.
+     * @return El objeto Buscador si se encuentra, o null si no se encuentra.
+     */
     @Override
     public Buscador consultarBuscador(String cedula) {
         // Busca el buscador por su cédula. Si no lo encuentra, retorna null
         return buscadorRepository.findById(cedula).orElse(null);
     }
 
-    // Método para actualizar un Buscador
+    /**
+     * Actualiza la información de un buscador existente.
+     *
+     * @param cedula    El número de cédula del buscador a actualizar.
+     * @param buscador  El objeto Buscador con la información actualizada.
+     */
     @Override
     public void actualizarBuscador(String cedula, Buscador buscador) {
         // Busca el buscador en la base de datos por su cédula
@@ -58,7 +72,12 @@ public class BuscadorServiceImpl implements BuscadorService {
         }
     }
 
-    // Método para eliminar un Buscador por su cédula
+    /**
+     * Elimina un buscador por su número de cédula.
+     *
+     * @param cedula El número de cédula del buscador a eliminar.
+     * @return true si se eliminó correctamente, false si no se pudo eliminar.
+     */
     @Override
     public boolean eliminarBuscador(String cedula) {
         // Elimina el buscador por su cédula
@@ -67,18 +86,28 @@ public class BuscadorServiceImpl implements BuscadorService {
         return buscadorRepository.existsById(cedula);
     }
 
-    // Método para listar todos los Buscadores
+    /**
+     * Lista todos los buscadores registrados en la base de datos.
+     *
+     * @return Lista de todos los buscadores.
+     */
     @Override
     public List<Buscador> listar() {
         // Retorna una lista de todos los buscadores en la base de datos
         return buscadorRepository.findAll();
     }
 
-    // Método para listar Buscadores por estatura
+    /**
+     * Lista buscadores por su estatura.
+     *
+     * @param estatura La estatura por la que se desea buscar.
+     * @return Lista de buscadores que cumplen con la estatura especificada.
+     */
     @Override
     public List<Buscador> listarPorEstatura(float estatura) {
         // Busca y retorna una lista de buscadores por su estatura
         return buscadorRepository.findByEstatura(estatura);
     }
+
 }
 

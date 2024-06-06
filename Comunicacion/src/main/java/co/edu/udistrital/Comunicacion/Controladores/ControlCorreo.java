@@ -28,6 +28,12 @@ public class ControlCorreo {
     private ServicioCorreoAmor servicioCorreoAmor;
 
     // Maneja las solicitudes POST a /comunicacion/correo
+    /**
+     * Maneja las solicitudes POST para enviar un correo electrónico estándar.
+     *
+     * @param correo El modelo de correo que contiene la información necesaria para enviar el correo.
+     * @return Una ResponseEntity que indica el resultado de la operación.
+     */
     @PostMapping("/correo")
     private ResponseEntity<String> sendEmail(@RequestBody ModeloCorreo correo) {
         try {
@@ -42,7 +48,12 @@ public class ControlCorreo {
         return ResponseEntity.ok("Correo enviado correctamente");
     }
 
-    // Maneja las solicitudes POST a /comunicacion/correoAmor
+    /**
+     * Maneja las solicitudes POST para enviar un correo electrónico de amor.
+     *
+     * @param correo El modelo de correo que contiene la información necesaria para enviar el correo.
+     * @return Una ResponseEntity que indica el resultado de la operación.
+     */
     @PostMapping("/correoAmor")
     private ResponseEntity<String> sendEmailAmor(@RequestBody ModeloCorreo correo) {
         try {
@@ -56,5 +67,6 @@ public class ControlCorreo {
         // Retorna una respuesta exitosa si el correo se envió correctamente
         return ResponseEntity.ok("Correo enviado correctamente");
     }
+
 }
 

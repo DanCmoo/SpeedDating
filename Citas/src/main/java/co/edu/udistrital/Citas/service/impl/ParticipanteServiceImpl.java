@@ -18,6 +18,11 @@ public class ParticipanteServiceImpl implements ParticipanteService {
     private RestTemplate restTemplate;
 
     // Método para obtener la lista de buscadores desde otro servicio
+    /**
+     * Obtiene la lista de buscadores desde otro servicio.
+     *
+     * @return La lista de buscadores obtenida del servicio.
+     */
     @Override
     public List<Buscador> obtenerBuscadores() {
         // Realiza una llamada HTTP GET al servicio de buscadores y mapea la respuesta a un array de Buscador
@@ -28,7 +33,11 @@ public class ParticipanteServiceImpl implements ParticipanteService {
         return Arrays.asList(buscadores);
     }
 
-    // Método para obtener la lista de postulantes desde otro servicio
+    /**
+     * Obtiene la lista de postulantes desde otro servicio.
+     *
+     * @return La lista de postulantes obtenida del servicio.
+     */
     @Override
     public List<Postulante> obtenerPostulante() {
         // Realiza una llamada HTTP GET al servicio de postulantes y mapea la respuesta a un array de Postulante
@@ -38,4 +47,5 @@ public class ParticipanteServiceImpl implements ParticipanteService {
         // Convierte el array a una lista y la retorna
         return Arrays.asList(postulantes);
     }
+
 }

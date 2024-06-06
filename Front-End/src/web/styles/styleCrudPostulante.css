@@ -37,6 +37,7 @@ header h1 {
 
 .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
+    cursor: pointer;
     margin-right: 5px;
 }
 

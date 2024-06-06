@@ -23,7 +23,11 @@ public class CitaServiceimpl implements iCitaService {
     @Autowired
     private RestTemplate restTemplate;
 
-    // Implementación del método generatePdf definido en la interfaz iCitaService
+    /**
+     * Genera un PDF con un listado de citas y sus calificaciones.
+     *
+     * @return Un ByteArrayInputStream que contiene el contenido del PDF generado.
+     */
     @Override
     public ByteArrayInputStream generatePdf() {
         // Llama al endpoint para obtener la lista de citas
@@ -63,24 +67,27 @@ public class CitaServiceimpl implements iCitaService {
             table3.addHeaderCell("Puntuación postulante");
 
             // Iterar sobre la lista de citas y agregarlas a las tablas correspondientes
-            for (Cita cita : citaList) {
-                if (cita.getCalificacion().equals("Amistad")) {
-                    table.addCell(cita.getBuscador());
-                    table.addCell(cita.getCalificacionBuscador());
-                    table.addCell(cita.getPostulante());
-                    table.addCell(cita.getCalificacionPostulante());
-                } else if (cita.getCalificacion().equals("Más que amistad")) {
-                    table2.addCell(cita.getBuscador());
-                    table2.addCell(cita.getCalificacionBuscador());
-                    table2.addCell(cita.getPostulante());
-                    table2.addCell(cita.getCalificacionPostulante());
-                } else {
-                    table3.addCell(cita.getBuscador());
-                    table3.addCell(cita.getCalificacionBuscador());
-                    table3.addCell(cita.getPostulante());
-                    table3.addCell(cita.getCalificacionPostulante());
+            if(!(citaList == null)){
+                for (Cita cita : citaList) {
+                    if (cita.getCalificacion().equals("Amistad")) {
+                        table.addCell(cita.getBuscador());
+                        table.addCell(cita.getCalificacionBuscador());
+                        table.addCell(cita.getPostulante());
+                        table.addCell(cita.getCalificacionPostulante());
+                    } else if (cita.getCalificacion().equals("Más que amistad")) {
+                        table2.addCell(cita.getBuscador());
+                        table2.addCell(cita.getCalificacionBuscador());
+                        table2.addCell(cita.getPostulante());
+                        table2.addCell(cita.getCalificacionPostulante());
+                    } else if(cita.getCalificacion().equals("No conexión")){
+                        table3.addCell(cita.getBuscador());
+                        table3.addCell(cita.getCalificacionBuscador());
+                        table3.addCell(cita.getPostulante());
+                        table3.addCell(cita.getCalificacionPostulante());
+                    }
                 }
             }
+
 
             // Agregar las tablas al documento con sus respectivos títulos
             document.add(table);

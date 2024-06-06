@@ -154,7 +154,8 @@ function listarBuscadores() {
     })
         .then(data => {
         // Limpiar la tabla antes de agregar los nuevos datos
-        const tablaBuscadores = document.getElementById('tablaBuscadores');
+        const tbody = document.querySelector('#tablaBuscadores tbody');
+        tbody.innerHTML = '';
 
 
         // Iterar sobre los datos recibidos y agregar filas a la tabla

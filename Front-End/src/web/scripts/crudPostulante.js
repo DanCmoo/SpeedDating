@@ -1,9 +1,10 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     listarPostulantes();
     const btnNuevoPostulante = document.getElementById('nuevoPostulante');
     const modal = document.getElementById('modal');
     const form = document.getElementById('myForm');
+    const form1 = document.getElementById('myForm1');
+    const modal1 = document.getElementById('modal1');
 
     btnNuevoPostulante.addEventListener("click", () => {
         modal.showModal();
@@ -14,7 +15,12 @@ document.addEventListener("DOMContentLoaded", function() {
         form.reset();
         modal.close();
     });
-
+    form1.addEventListener('submit', (event) => {
+        event.preventDefault();
+        editar();
+        form1.reset();
+        modal1.close();
+    });
     modal.addEventListener('click', (event) => {
         if (event.target === modal) {
             modal.close();
@@ -80,7 +86,7 @@ function guardarPostulante() {
         },
         body: JSON.stringify(formData)
     })
-    .then(response => {
+        .then(response => {
         if (response.ok) {
             const tablaPostulantes = document.getElementById('tablaPostulantes');
             tablaPostulantes.innerHTML =`
@@ -117,11 +123,11 @@ function guardarPostulante() {
             throw new Error('Error al enviar el postulante');
         }
     })
-    .then(data => {
+        .then(data => {
         console.log(data);
 
     })
-    .catch(error => {
+        .catch(error => {
         console.error('Error:', error);
     });
 }
@@ -154,9 +160,9 @@ function listarPostulantes(){
             const newRow = tablaPostulantes.insertRow();
             newRow.innerHTML = `
                                     <td>
-                                        <span class="material-symbols-outlined" onclick="editarPostulante(${postulante.cedula})">edit</span>
+                                        <span class="material-symbols-outlined" onclick="editarPostulante('${postulante.cedula}')">edit</span>
                                         <span class="material-symbols-outlined" onclick="eliminarPostulante('${postulante.cedula}')">delete</span>
-                                        <span class="material-symbols-outlined" onclick="verPostulante(${postulante.cedula})">visibility</span>
+                                        <span class="material-symbols-outlined" onclick="verPostulante('${postulante.cedula}')">visibility</span>
                                     </td>
                                     <td>${datoPago}</td>
                                     <td>${postulante.nombre}</td>
@@ -264,9 +270,9 @@ function buscarPostulante(cedula) {
             }
             row.innerHTML = `
                 <td>
-                    <span class="material-symbols-outlined" onclick="editarPostulante(${data.cedula})">edit</span>
-                    <span class="material-symbols-outlined" onclick="eliminarPostulante(${data.cedula})">delete</span>
-                    <span class="material-symbols-outlined" onclick="verPostulante(${data.cedula})">visibility</span>
+                    <span class="material-symbols-outlined" onclick="editarPostulante('${data.cedula}')">edit</span>
+                    <span class="material-symbols-outlined" onclick="eliminarPostulante('${data.cedula}')">delete</span>
+                    <span class="material-symbols-outlined" onclick="verPostulante('${data.cedula}')">visibility</span>
                 </td>
                 <td>${datoPago}</td>
                 <td>${data.nombre}</td>
@@ -290,39 +296,157 @@ function buscarPostulante(cedula) {
         console.error('Error:', error);
     });
 
-    function visualizarPostulante(cedula) {
-        fetch(`http://localhost:8081/postulante/${cedula}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+}
+function verPostulante(cedula) {
+    fetch("http://localhost:8081/postulante/"+cedula, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
         .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Error al obtener los datos del postulante');
-            }
-        })
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Error al obtener los datos del postulante');
+        }
+    })
         .then(data => {
-            document.getElementById('name2').value = data.nombre;
-            document.getElementById('lastname2').value = data.apellido;
-            document.getElementById('cedula2').value = data.cedula;
-            document.getElementById('edad2').value = data.edad;
-            document.getElementById('estatura2').value = data.estatura;
-            document.getElementById('p_o2').value = data.profesion;
-            document.getElementById('contextura2').value = data.contextura;
-            document.getElementById('estadoCivil2').value = data.estado;
-            document.getElementById('genero2').value = data.identidad;
-            document.getElementById('email2').value = data.correo;
-            document.getElementById('telefono2').value = data.telefono;
-            document.getElementById('interesPersonal2').value = data.interes_personal;
-            document.getElementById('disponibilidad2').value = data.disponibilidad;
+        document.getElementById('name2').value = data.nombre;
+        document.getElementById('lastname2').value = data.apellido;
+        document.getElementById('cedula2').value = data.cedula;
+        document.getElementById('edad2').value = data.edad;
+        document.getElementById('estatura2').value = data.estatura;
+        document.getElementById('p_o2').value = data.profesion;
+        document.getElementById('contextura2').value = data.contextura;
+        const disponibilidadSelect = document.getElementById('estadoCivil2');
+        for (let i = 0; i < disponibilidadSelect.options.length; i++) {
+            if (disponibilidadSelect.options[i].value === data.estado) {
+                disponibilidadSelect.selectedIndex = i;
+                break;
+            }
+        }
+        document.getElementById('genero2').value = data.identidad;
+        document.getElementById('email2').value = data.correo;
+        document.getElementById('telefono2').value = data.telefono;
+        document.getElementById('interesPersonal2').value = data.interes;
+        const dispo = data.disponibilidad;
+        let datoDispo = "no";
+        if(dispo){
+            datoDispo = "si";
+        }
+        document.getElementById('disponibilidad2').value = datoDispo;
 
-            document.getElementById('modal2').showModal();
-        })
+
+        document.getElementById('modal2').showModal();
+
+    })
         .catch(error => {
-            console.error('Error:', error);
-        });
+        console.error('Error:', error);
+    });
+}
+function editarPostulante(cedula){
+    fetch("http://localhost:8081/postulante/"+cedula, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Error al obtener los datos del buscador');
+        }
+    })
+        .then(data => {
+        document.getElementById('name1').value = data.nombre;
+        document.getElementById('lastname1').value = data.apellido;
+        document.getElementById('cedula1').value = data.cedula;
+        document.getElementById('edad1').value = data.edad;
+        document.getElementById('estatura1').value = data.estatura;
+        document.getElementById('p_o1').value = data.profesion;
+        document.getElementById('contextura1').value = data.contextura;
+        const disponibilidadSelect = document.getElementById('estadoCivil1');
+        for (let i = 0; i < disponibilidadSelect.options.length; i++) {
+            if (disponibilidadSelect.options[i].value === data.estado) {
+                disponibilidadSelect.selectedIndex = i;
+                break;
+            }
+        }
+        document.getElementById('genero1').value = data.identidad;
+        document.getElementById('email1').value = data.correo;
+        document.getElementById('telefono1').value = data.telefono;
+        document.getElementById('interesPersonal1').value = data.interes;
+        const dispo = data.disponibilidad;
+        let datoDispo = "no";
+        if(dispo){
+            datoDispo = "si";
+        }
+        document.getElementById('disponibilidad2').value = datoDispo;
+
+        const form = document.getElementById('myForm1');
+        form.dataset.editing = 'true';
+        form.dataset.cedula = data.cedula;
+
+        document.getElementById('modal1').showModal();
+    })
+        .catch(error => {
+        console.error('Error:', error);
+    });
+}
+function editar(){
+    const nombre = document.getElementById('name1').value;
+    const apellido = document.getElementById('lastname1').value;
+    const edad = document.getElementById('edad1').value;
+    const cedula =  document.getElementById('cedula1').value;
+    const estatura = document.getElementById('estatura1').value;
+    const profesion = document.getElementById('p_o1').value;
+    const contextura = document.getElementById('contextura1').value;
+    const estadoCivil = document.getElementById('estadoCivil1').value;
+    const genero = document.getElementById('genero1').value;
+    const correo = document.getElementById('email1').value;
+    const telefono = document.getElementById('telefono1').value;
+    const interes = document.getElementById('interesPersonal1').value;
+    let disponibilidad = false;
+    if(document.getElementById('interesPersonal1').value == "si"){
+        disponibilidad = true;
     }
+
+    const formData = {
+        nombre: nombre,
+        apellido: apellido,
+        cedula: cedula,
+        edad: edad,
+        estatura: estatura,
+        profesion: profesion,
+        contextura: contextura,
+        estado: estadoCivil,
+        identidad: genero,
+        correo: correo,
+        telefono: telefono,
+        interes: interes,
+        disponibilidad: disponibilidad,
+    };
+    fetch("http://localhost:8081/postulante/"+cedula, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(formData)
+    })
+        .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Error al obtener los datos del buscador');
+        }
+    })
+        .then(data => {
+
+    })
+        .catch(error => {
+        console.error('Error:', error);
+    });
+
 }

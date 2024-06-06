@@ -26,7 +26,12 @@ public class CorreoConfig {
     private String contraseña;
 
     // Método privado para configurar las propiedades del correo
-    private Properties getCorreoProperties(){
+    /**
+     * Obtiene las propiedades de configuración necesarias para enviar correos electrónicos.
+     *
+     * @return Un objeto Properties con las propiedades configuradas para SMTP.
+     */
+    private Properties getCorreoProperties() {
         Properties properties = new Properties();
         // Habilita la autenticación SMTP
         properties.put("mail.smtp.auth", "true");
@@ -39,9 +44,13 @@ public class CorreoConfig {
         return properties;
     }
 
-    // Define un bean para enviar correos electrónicos
+    /**
+     * Define un bean para enviar correos electrónicos.
+     *
+     * @return Una instancia de JavaMailSender configurada con las propiedades y credenciales necesarias.
+     */
     @Bean
-    public JavaMailSender javaMailSender(){
+    public JavaMailSender javaMailSender() {
         // Crea una instancia de JavaMailSenderImpl
         JavaMailSenderImpl correoEnviar = new JavaMailSenderImpl();
         // Establece las propiedades de correo electrónico
@@ -53,10 +62,15 @@ public class CorreoConfig {
         return correoEnviar;
     }
 
-    // Define un bean para cargar recursos
+    /**
+     * Define un bean para cargar recursos.
+     *
+     * @return Una instancia de DefaultResourceLoader.
+     */
     @Bean
-    public ResourceLoader resourceLoader(){
+    public ResourceLoader resourceLoader() {
         return new DefaultResourceLoader();
     }
+
 }
 

@@ -17,6 +17,13 @@ import java.util.Random;
 @Service
 public class GeneracionServiceImpl implements GeneracionService {
 
+    /**
+     * Empareja buscadores y postulantes para generar citas basadas en sus preferencias.
+     *
+     * @param buscadores  La lista de buscadores disponibles.
+     * @param postulantes La lista de postulantes disponibles.
+     * @return Una lista de citas generadas.
+     */
     @Override
     public List<Cita> emparejarCitas(List<Buscador> buscadores, List<Postulante> postulantes) {
         List<Cita> citas = new ArrayList<>();
@@ -39,13 +46,19 @@ public class GeneracionServiceImpl implements GeneracionService {
                     coincidencias++;
                 }
                 if (coincidencias >= 3) {
-                    citas.add(new Cita(buscador.getCedula(),buscador.getNombre(), postulante.getCedula(),postulante.getNombre()));
+                    citas.add(new Cita(buscador.getCedula(), buscador.getNombre(), postulante.getCedula(), postulante.getNombre()));
                 }
             }
         }
         return citas;
     }
 
+    /**
+     * Asigna calificaciones aleatorias a las citas.
+     *
+     * @param citas La lista de citas a calificar.
+     * @return La lista de citas con calificaciones asignadas.
+     */
     @Override
     public List<Cita> calificarCitas(List<Cita> citas) {
         String[] calificacion = {"No conexión", "Amistad", "Más que amistad"};
@@ -58,14 +71,19 @@ public class GeneracionServiceImpl implements GeneracionService {
             cita.setCalificacionPostulante(calificacionPostulante);
             if (calificacionPostulante.equals(calificacionBuscador)) {
                 cita.setCalificacion(calificacionBuscador);
-            }else{
+            } else {
                 cita.setCalificacion(calificacion[0]);
             }
         }
-
         return citas;
     }
 
+    /**
+     * Asigna horarios a las citas de forma secuencial.
+     *
+     * @param citas La lista de citas a las que se les asignará horario.
+     * @return La lista de citas con horarios asignados.
+     */
     @Override
     public List<Cita> asignarHorarios(List<Cita> citas) {
         LocalDate currentDate = LocalDate.now().plusDays(1); // Comenzar desde el día siguiente al actual
@@ -76,7 +94,6 @@ public class GeneracionServiceImpl implements GeneracionService {
         LocalDateTime horarioInicial = LocalDateTime.of(currentDate, startTime);
 
         for (Cita cita : citas) {
-            int i = 0;
             LocalDateTime horarioCita = horarioInicial;
 
             // Encuentra la próxima hora disponible para la cita
@@ -91,4 +108,5 @@ public class GeneracionServiceImpl implements GeneracionService {
 
         return citas;
     }
+
 }

@@ -18,20 +18,35 @@ public class PostulanteServiceImpl implements PostulanteService {
     private PostulanteRepository postulanteRepository;
 
     // Método para crear un nuevo Postulante
+    /**
+     * Crea un nuevo postulante y lo guarda en la base de datos.
+     *
+     * @param postulante El objeto Postulante a crear.
+     */
     @Override
     public void crearPostulante(Postulante postulante) {
         // Guarda el nuevo postulante en la base de datos
         postulanteRepository.save(postulante);
     }
 
-    // Método para consultar un Postulante por su cédula
+    /**
+     * Consulta un postulante por su número de cédula.
+     *
+     * @param cedula El número de cédula del postulante a consultar.
+     * @return El objeto Postulante si se encuentra, o null si no se encuentra.
+     */
     @Override
     public Postulante consultarPostulante(String cedula) {
         // Busca el postulante por su cédula. Si no lo encuentra, retorna null
         return postulanteRepository.findById(cedula).orElse(null);
     }
 
-    // Método para actualizar un Postulante
+    /**
+     * Actualiza la información de un postulante existente.
+     *
+     * @param cedula        El número de cédula del postulante a actualizar.
+     * @param postulante    El objeto Postulante con la información actualizada.
+     */
     @Override
     public void actualizarPostulante(String cedula, Postulante postulante) {
         // Busca el postulante en la base de datos por su cédula
@@ -56,7 +71,12 @@ public class PostulanteServiceImpl implements PostulanteService {
         }
     }
 
-    // Método para eliminar un Postulante por su cédula
+    /**
+     * Elimina un postulante por su número de cédula.
+     *
+     * @param cedula El número de cédula del postulante a eliminar.
+     * @return true si se eliminó correctamente, false si no se pudo eliminar.
+     */
     @Override
     public boolean eliminarPostulante(String cedula) {
         // Elimina el postulante por su cédula
@@ -65,11 +85,16 @@ public class PostulanteServiceImpl implements PostulanteService {
         return postulanteRepository.existsById(cedula);
     }
 
-    // Método para listar todos los Postulantes
+    /**
+     * Lista todos los postulantes registrados en la base de datos.
+     *
+     * @return Lista de todos los postulantes.
+     */
     @Override
     public List<Postulante> listar() {
         // Retorna una lista de todos los postulantes en la base de datos
         return postulanteRepository.findAll();
     }
+
 }
 

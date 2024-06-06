@@ -1,8 +1,10 @@
 package co.edu.udistrital.pdf.controller;
 
 import co.edu.udistrital.pdf.services.iCitaService;
+import com.itextpdf.io.exceptions.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,11 @@ public class PdfController {
     @Autowired
     private iCitaService iCitaService;
 
-    // Mapeo del método HTTP GET a la URL /pdf
+    /**
+     * Endpoint para generar un PDF con citas.
+     *
+     * @return ResponseEntity con el PDF generado o un error en caso de fallo.
+     */
     @GetMapping("/pdf")
     public ResponseEntity<byte[]> generarPdf() {
         // Llama al servicio iCitaService para generar el PDF
@@ -39,5 +45,6 @@ public class PdfController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 }
 

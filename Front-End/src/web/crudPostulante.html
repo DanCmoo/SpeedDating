@@ -454,20 +454,16 @@
             <div class="formbold-form-wrapper">
                 <img src="images/form_Buscador.jpg">
                 <form id="myForm2" action="/submit" method="POST">
-
                     <div class="formbold-input-group">
-                        <label class="formbold-form-label">
-                            ¿Registra pago?
-                        </label>
-
-                        <select class="formbold-form-select" name="registroPago" id="registroPago2">
+                        <label class="formbold-form-label">¿Registra pago?</label>
+                        <select class="formbold-form-select" name="registroPago" id="registroPago2" disabled>
                             <option value="si">Sí</option>
                             <option value="no">No</option>
                         </select>
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="name2" class="formbold-form-label"> Nombre </label>
+                        <label for="name2" class="formbold-form-label">Nombre</label>
                         <input
                                 type="text"
                                 name="nombre"
@@ -475,11 +471,12 @@
                                 placeholder="Escriba el nombre"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="lastname2" class="formbold-form-label"> Apellido </label>
+                        <label for="lastname2" class="formbold-form-label">Apellido</label>
                         <input
                                 type="text"
                                 name="apellido"
@@ -487,11 +484,12 @@
                                 placeholder="Escriba el apellido"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="cedula2" class="formbold-form-label"> Cédula </label>
+                        <label for="cedula2" class="formbold-form-label">Cédula</label>
                         <input
                                 type="text"
                                 name="cedula"
@@ -504,11 +502,8 @@
                     </div>
 
                     <div class="formbold-input-group">
-                        <label class="formbold-form-label">
-                            Edad
-                        </label>
-
-                        <select class="formbold-form-select" name="edad" id="edad2">
+                        <label class="formbold-form-label">Edad</label>
+                        <select class="formbold-form-select" name="edad" id="edad2" disabled>
                             <option value="25">25</option>
                             <option value="26">26</option>
                             <option value="27">27</option>
@@ -524,7 +519,7 @@
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="estatura2" class="formbold-form-label"> Estatura </label>
+                        <label for="estatura2" class="formbold-form-label">Estatura</label>
                         <input
                                 type="number"
                                 step="0.01"
@@ -534,11 +529,12 @@
                                 placeholder="Escriba la estatura en metros"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="p_o2" class="formbold-form-label"> Profesión u oficio </label>
+                        <label for="p_o2" class="formbold-form-label">Profesión u oficio</label>
                         <input
                                 type="text"
                                 name="profesion"
@@ -546,11 +542,12 @@
                                 placeholder="Escriba la profesión u oficio"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="contextura2" class="formbold-form-label"> Contextura </label>
+                        <label for="contextura2" class="formbold-form-label">Contextura</label>
                         <input
                                 type="text"
                                 name="contextura"
@@ -558,15 +555,13 @@
                                 placeholder="Escriba la contextura"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label class="formbold-form-label">
-                            Estado civil
-                        </label>
-
-                        <select class="formbold-form-select" name="estado" id="estadoCivil2">
+                        <label class="formbold-form-label">Estado civil</label>
+                        <select class="formbold-form-select" name="estado" id="estadoCivil2" disabled>
                             <option value="soltero">Soltero</option>
                             <option value="separado">Separado</option>
                             <option value="viudo">Viudo</option>
@@ -575,7 +570,7 @@
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="genero2" class="formbold-form-label"> Identidad de Género </label>
+                        <label for="genero2" class="formbold-form-label">Identidad de Género</label>
                         <input
                                 type="text"
                                 name="identidad"
@@ -583,11 +578,12 @@
                                 placeholder="Escriba el género"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="email2" class="formbold-form-label"> Correo </label>
+                        <label for="email2" class="formbold-form-label">Correo</label>
                         <input
                                 type="email"
                                 name="correo"
@@ -596,11 +592,12 @@
                                 placeholder="Escriba el correo"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="telefono2" class="formbold-form-label"> Teléfono </label>
+                        <label for="telefono2" class="formbold-form-label">Teléfono</label>
                         <input
                                 type="tel"
                                 pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
@@ -609,11 +606,12 @@
                                 placeholder="Escriba el teléfono"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label for="interesPersonal2" class="formbold-form-label"> Interés personal </label>
+                        <label for="interesPersonal2" class="formbold-form-label">Interés personal</label>
                         <input
                                 type="text"
                                 name="interes_principal"
@@ -621,22 +619,21 @@
                                 placeholder="Escriba el interés personal"
                                 class="formbold-form-input"
                                 required
+                                readonly
                         />
                     </div>
 
                     <div class="formbold-input-group">
-                        <label class="formbold-form-label">
-                            ¿Está disponible?
-                        </label>
-                        <select class="formbold-form-select" name="disponibilidad" id="disponibilidad2">
+                        <label class="formbold-form-label">¿Está disponible?</label>
+                        <select class="formbold-form-select" name="disponibilidad" id="disponibilidad2" disabled>
                             <option value="si">Sí</option>
                             <option value="no">No</option>
                         </select>
                     </div>
 
-
                     <button type="button" class="formbold-btn" onclick="document.getElementById('modal2').close();">Cerrar</button>
                 </form>
+
             </div>
         </div>
     </dialog>

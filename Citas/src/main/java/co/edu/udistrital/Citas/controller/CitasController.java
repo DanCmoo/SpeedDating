@@ -25,6 +25,12 @@ public class CitasController {
     @Autowired
     private CitaService citaService;
 
+    /**
+     * Genera citas entre buscadores y postulantes, las asigna horarios y las califica.
+     * Luego, guarda las citas generadas en la base de datos.
+     *
+     * @return ResponseEntity con un mensaje indicando si las citas se generaron correctamente.
+     */
     @GetMapping("/generar")
     public ResponseEntity<String> generarCitas() {
         citaService.eliminarCitas();
@@ -34,9 +40,14 @@ public class CitasController {
         for (Cita cita : citas) {
             citaService.crearCita(cita);
         }
-        return ResponseEntity.ok("Se han generado las citas con exito");
+        return ResponseEntity.ok("Se han generado las citas con éxito");
     }
 
+    /**
+     * Obtiene todas las citas registradas en la base de datos.
+     *
+     * @return ResponseEntity con la lista de citas si existen, o un ResponseEntity sin contenido si no hay citas.
+     */
     @GetMapping("/listar")
     public ResponseEntity<List<Cita>> listarCitas() {
         List<Cita> citas = citaService.listar();
@@ -46,6 +57,12 @@ public class CitasController {
         return ResponseEntity.ok(citas);
     }
 
+    /**
+     * Obtiene todas las citas con una calificación específica.
+     *
+     * @param calificacion La calificación de las citas a listar.
+     * @return ResponseEntity con la lista de citas si existen, o un ResponseEntity sin contenido si no hay citas con esa calificación.
+     */
     @GetMapping("/listar/{calificacion}")
     public ResponseEntity<List<Cita>> listarCitasPorCalificacion(@PathVariable String calificacion) {
         List<Cita> citas = citaService.listarPorCalificacion(calificacion);
@@ -55,12 +72,19 @@ public class CitasController {
         return ResponseEntity.ok(citas);
     }
 
+    /**
+     * Obtiene todas las citas de un buscador específico por su número de cédula.
+     *
+     * @param cedulaBuscador La cédula del buscador cuyas citas se desean listar.
+     * @return ResponseEntity con la lista de citas si existen, o un ResponseEntity con estado NOT_FOUND si no hay citas para el buscador.
+     */
     @GetMapping("/listar/cedula/{cedulaBuscador}")
-    public ResponseEntity<List<Cita>> listarPorCedulaBuscador(@PathVariable String cedulaBuscador){
+    public ResponseEntity<List<Cita>> listarPorCedulaBuscador(@PathVariable String cedulaBuscador) {
         List<Cita> citas = citaService.listarPorCedulaBuscador(cedulaBuscador);
-        if(citas.isEmpty()){
+        if (citas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return ResponseEntity.ok(citas);
     }
+
 }

@@ -8,14 +8,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    // Método para configurar CORS (Cross-Origin Resource Sharing)
+    /**
+     * Configura las reglas de CORS (Cross-Origin Resource Sharing) para la aplicación.
+     *
+     * @param registry el registro de CORS utilizado para agregar las configuraciones.
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        // Configura las reglas de CORS
-        registry.addMapping("/**") // Autoriza todas las URL del servidor
-                .allowedOrigins("*") // Permite solicitudes desde cualquier origen
-                .allowedMethods("GET", "POST", "PUT", "DELETE") // Permite los métodos HTTP especificados
-                .allowedHeaders("*"); // Permite todos los encabezados
+        registry.addMapping("/**") // Autoriza todas las URL
+                .allowedOrigins("*") // Permitir solicitudes desde cualquier origen
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
+                .allowedHeaders("*"); // Encabezados permitidos
     }
+
 }
 

@@ -24,7 +24,12 @@ public class ServicioCorreoAmor implements iServicioCorreo {
         this.templateEngine = templateEngine;
     }
 
-    // Implementación del método enviarCorreo definido en la interfaz iServicioCorreo
+    /**
+     * Envía un correo electrónico con el resultado de una cita de amor.
+     *
+     * @param correo El modelo de correo que contiene la información necesaria para enviar el correo.
+     * @throws MessagingException Si ocurre un error durante el proceso de envío del correo.
+     */
     @Override
     public void enviarCorreo(ModeloCorreo correo) throws MessagingException {
         // Crear el primer mensaje de correo electrónico
@@ -63,5 +68,6 @@ public class ServicioCorreoAmor implements iServicioCorreo {
         helper2.setText(contenidoHTML2, true); // Establece el contenido del correo
         javaMailSender.send(mensaje2); // Envía el correo
     }
+
 }
 

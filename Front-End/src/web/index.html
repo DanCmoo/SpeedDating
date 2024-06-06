@@ -32,14 +32,22 @@
     <div>
         <h2 id="saludo"></h2>
     </div>
+    <div class="enunciado">
+        <p>¿Cómo desea mostrar los resultados?</p>
+    </div>
     <div class="btnContainer">
-
-        <button class="botonNuevo" onclick="enviarCorreo()">
-            Correo
-        </button>
-        <button class="botonNuevo" onclick="pedirPDF()">
-            PDF
-        </button>
+        <div class="btnGroup">
+            <p class="btnLabel">Enviar un correo</p>
+            <button class="botonNuevo" onclick="enviarCorreo()">
+                Correo
+            </button>
+        </div>
+        <div class="btnGroup">
+            <p class="btnLabel">Generar un PDF</p>
+            <button class="botonNuevo" onclick="pedirPDF()">
+                PDF
+            </button>
+        </div>
     </div>
 </main>
 

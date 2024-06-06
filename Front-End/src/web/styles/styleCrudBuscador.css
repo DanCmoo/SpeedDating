@@ -1,7 +1,5 @@
 body {
     font-family: Trebuchet MS, sans-serif;
-    background-image: url('images/background.png');
-    background-size: cover;
     margin: 0;
     padding: 0;
     overflow-y: auto;

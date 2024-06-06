@@ -11,36 +11,52 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import javax.tools.JavaFileManager;
 import java.util.Properties;
 
+// Indica que esta clase es una configuración de Spring
 @Configuration
+// Especifica el archivo de propiedades que se utilizará
 @PropertySource("classpath:correo.properties")
 public class CorreoConfig {
 
+    // Inyecta el valor de la propiedad 'correo.usuario' desde el archivo de propiedades
     @Value("${correo.usuario}")
     private String correo;
 
+    // Inyecta el valor de la propiedad 'correo.contraseña' desde el archivo de propiedades
     @Value("${correo.contraseña}")
     private String contraseña;
 
+    // Método privado para configurar las propiedades del correo
     private Properties getCorreoProperties(){
-        Properties properties=new Properties();
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.starttls"+".enable","true");
-        properties.put("mail.smtp.host","smtp"+".gmail.com");
-        properties.put("mail.smtp.port","587");
+        Properties properties = new Properties();
+        // Habilita la autenticación SMTP
+        properties.put("mail.smtp.auth", "true");
+        // Habilita el uso de STARTTLS
+        properties.put("mail.smtp.starttls.enable", "true");
+        // Configura el host del servidor SMTP
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        // Configura el puerto del servidor SMTP
+        properties.put("mail.smtp.port", "587");
         return properties;
-
     }
+
+    // Define un bean para enviar correos electrónicos
     @Bean
     public JavaMailSender javaMailSender(){
-        JavaMailSenderImpl correoEnviar=new JavaMailSenderImpl();
+        // Crea una instancia de JavaMailSenderImpl
+        JavaMailSenderImpl correoEnviar = new JavaMailSenderImpl();
+        // Establece las propiedades de correo electrónico
         correoEnviar.setJavaMailProperties(getCorreoProperties());
+        // Establece el nombre de usuario del correo electrónico
         correoEnviar.setUsername(correo);
+        // Establece la contraseña del correo electrónico
         correoEnviar.setPassword(contraseña);
         return correoEnviar;
     }
+
+    // Define un bean para cargar recursos
     @Bean
     public ResourceLoader resourceLoader(){
         return new DefaultResourceLoader();
-
     }
 }
+

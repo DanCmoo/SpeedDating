@@ -237,3 +237,45 @@ function eliminarBuscador(cedula){
 
 
 }
+
+function editarBuscador(cedula) {
+        fetch('http://localhost:8081/buscador/{cedula}')
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error al obtener los datos del buscador');
+            }
+        })
+        .then(data => {
+            document.getElementById('name').value = data.nombre;
+            document.getElementById('lastname').value = data.apellido;
+            document.getElementById('cedula').value = data.cedula;
+            document.getElementById('edad').value = data.edad;
+            document.getElementById('estatura').value = data.estatura;
+            document.getElementById('p_o').value = data.profesion;
+            document.getElementById('contextura').value = data.contextura;
+            document.getElementById('estadoCivil').value = data.estado;
+            document.getElementById('genero').value = data.identidad;
+            document.getElementById('email').value = data.correo;
+            document.getElementById('telefono').value = data.telefono;
+            document.getElementById('gustoContextura').value = data.gustoContextura;
+            document.getElementById('gustoInteres').value = data.gustoInteres;
+            document.getElementById('gustoEstatura').value = data.gustoEstatura;
+            document.getElementById('gustoGenero').value = data.gustoIdentidad;
+            document.getElementById('gustoEdad').value = data.gustoEdad;
+
+
+            const form = document.getElementById('myForm');
+            form.dataset.editing = 'true';
+            form.dataset.cedula = data.cedula;
+
+
+            document.getElementById('modal').showModal();
+        })
+        .catch(error => {
+
+            console.error('Error:', error);
+        });
+    }
+}

@@ -1,0 +1,88 @@
+@startuml
+
+package "config" {
+    class CorreoConfig {
+      - String correo
+      - String contraseña
+      - Properties getCorreoProperties()
+      + JavaMailSender javaMailSender()
+      + ResourceLoader resourceLoader()
+    }
+
+    class WebConfig {
+      + addCorsMappings(CorsRegistry registry)
+    }
+}
+
+package "controllers" {
+    class ControlCorreo {
+      - ServicioCorreoimpl servicioCorreo
+      - ServicioCorreoAmor servicioCorreoAmor
+      + ResponseEntity<String> sendEmail(ModeloCorreo correo)
+      + ResponseEntity<String> sendEmailAmor(ModeloCorreo correo)
+    }
+}
+
+package "models" {
+    class ModeloCorreo {
+      - String nombreBuscador
+      - String correoBuscador
+      - String nombrePostulante
+      - String correoPostulante
+      - String telefonoBuscador
+      - String telefonoPostulante
+    }
+
+    class Cita {
+      - String buscador
+      - String cedulaBuscador
+      - String postulante
+      - String cedulaPostulante
+      - String calificacionBuscador
+      - String calificacionPostulante
+      - String calificacion
+      - String fecha
+    }
+}
+
+package "services" {
+    package "impl" {
+        class ServicioCorreoAmor implements iServicioCorreo {
+          - JavaMailSender javaMailSender
+          - TemplateEngine templateEngine
+          + enviarCorreo(ModeloCorreo correo) throws MessagingException
+        }
+
+        class ServicioCorreoimpl implements iServicioCorreo {
+          - JavaMailSender javaMailSender
+          - TemplateEngine templateEngine
+          + enviarCorreo(ModeloCorreo correo) throws MessagingException
+        }
+
+        ControlCorreo --> ServicioCorreoimpl
+        ControlCorreo --> ServicioCorreoAmor
+        ServicioCorreoAmor --> ModeloCorreo
+        ServicioCorreoimpl --> ModeloCorreo
+        ServicioCorreoAmor --> iServicioCorreo
+        ServicioCorreoimpl --> iServicioCorreo
+    }
+}
+
+
+
+
+
+class ComunicacionApplication {
+  + main(String[] args)
+}
+
+ComunicacionApplication --> CorreoConfig
+ComunicacionApplication --> WebConfig
+ComunicacionApplication --> ControlCorreo
+ControlCorreo --> ModeloCorreo
+ControlCorreo --> Cita
+
+@enduml
+
+
+

@@ -1,4 +1,4 @@
-package co.edu.udistrital.Comunicacion.Service;
+package co.edu.udistrital.Comunicacion.Service.impl;
 
 import co.edu.udistrital.Comunicacion.models.ModeloCorreo;
 import jakarta.mail.MessagingException;

@@ -1,0 +1,130 @@
+@startuml
+
+package "config" {
+class RestTemplateConfig {
+        + restTemplate(): RestTemplate
+    }
+    class WebConfig {
+            + addCorsMappings(CorsRegistry registry)
+        }
+}
+
+package "controller" {
+class CitasController {
+        - generacionService: GeneracionService
+        - participanteService: ParticipanteService
+        - citaService: CitaService
+        + generarCitas(): ResponseEntity<String>
+        + listarCitas(): ResponseEntity<List<Cita>>
+        + listarCitasPorCalificacion(calificacion: String): ResponseEntity<List<Cita>>
+        + listarPorCedulaBuscador(cedulaBuscador: String): ResponseEntity<List<Cita>>
+    }
+}
+
+package "entity" {
+    class Buscador {
+        - gustoContextura: String
+        - gustoInteres: String
+        - gustoEstatura: float
+        - gustoIdentidad: String
+        - gustoEdad: int
+    }
+    class Cita {
+            - id: Long
+            - buscador: String
+            - cedulaBuscador: String
+            - calificacionBuscador: String
+            - postulante: String
+            - cedulaPostulante: String
+            - calificacionPostulante: String
+            - fecha: String
+            - calificacion: String
+        }
+        class Persona {
+                - cedula: String
+                - nombre: String
+                - apellido: String
+                - edad: int
+                - estatura: float
+                - profesion: String
+                - contextura: String
+                - estado: String
+                - identidad: String
+                - correo: String
+                - telefono: String
+                - pago: boolean
+            }
+    class Postulante {
+            - interesPrincipal: String
+            - disponibilidad: boolean
+            - cedula: String
+            - nombre: String
+            - apellido: String
+            - edad: int
+            - estatura: float
+            - profesion: String
+            - contextura: String
+            - estado: String
+            - identidad: String
+            - correo: String
+            - telefono: String
+            - pago: boolean
+        }
+
+
+}
+
+package "repository" {
+interface CitaRepository {
+        + findByCalificacion(calificacion: String): List<Cita>
+        + findByCedulaBuscador(cedulaBuscador: String): List<Cita>
+        + deleteAll(): void
+    }
+}
+
+package "services" {
+    package "impl" {
+    class CitaServiceImpl {
+            - citaRepository: CitaRepository
+            - entityManager: EntityManager
+            + crearCita(cita: Cita): void
+            + listarPorCalificacion(calificacion: String): List<Cita>
+            + listarPorCedulaBuscador(cedulaBuscador: String): List<Cita>
+            + listar(): List<Cita>
+            + eliminarCitas(): void
+        }
+        class GeneracionServiceImpl {
+                    + emparejarCitas(buscadores: List<Buscador>, postulantes: List<Postulante>): List<Cita>
+                    + calificarCitas(citas: List<Cita>): List<Cita>
+                    + asignarHorarios(citas: List<Cita>): List<Cita>
+                }
+                class ParticipanteServiceImpl {
+                        + obtenerBuscadores(): List<Buscador>
+                        + obtenerPostulante(): List<Postulante>
+                    }
+    }
+    interface CitaService {
+            + crearCita(Cita cita)
+            + listarPorCalificacion(String calificacion): List<Cita>
+            + listarPorCedulaBuscador(String cedulaBuscador): List<Cita>
+            + listar(): List<Cita>
+            + eliminarCitas()
+        }
+    interface GeneracionService {
+            + emparejarCitas(List<Buscador> buscadores, List<Postulante> postulantes): List<Cita>
+            + calificarCitas(List<Cita> citas): List<Cita>
+            + asignarHorarios(List<Cita> citas): List<Cita>
+        }
+    interface ParticipanteService {
+            + obtenerBuscadores(): List<Buscador>
+            + obtenerPostulante(): List<Postulante>
+        }
+}
+CitasController --> CitaService
+CitaService --> CitaRepository
+CitaServiceImpl --> CitaRepository
+CitaServiceImpl --> EntityManager
+GeneracionServiceImpl --> ParticipanteService
+ParticipanteServiceImpl --> RestTemplateConfig
+
+@enduml

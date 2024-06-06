@@ -289,4 +289,40 @@ function buscarPostulante(cedula) {
         .catch(error => {
         console.error('Error:', error);
     });
+
+    function visualizarPostulante(cedula) {
+        fetch(`http://localhost:8081/postulante/${cedula}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error al obtener los datos del postulante');
+            }
+        })
+        .then(data => {
+            document.getElementById('name2').value = data.nombre;
+            document.getElementById('lastname2').value = data.apellido;
+            document.getElementById('cedula2').value = data.cedula;
+            document.getElementById('edad2').value = data.edad;
+            document.getElementById('estatura2').value = data.estatura;
+            document.getElementById('p_o2').value = data.profesion;
+            document.getElementById('contextura2').value = data.contextura;
+            document.getElementById('estadoCivil2').value = data.estado;
+            document.getElementById('genero2').value = data.identidad;
+            document.getElementById('email2').value = data.correo;
+            document.getElementById('telefono2').value = data.telefono;
+            document.getElementById('interesPersonal2').value = data.interes_personal;
+            document.getElementById('disponibilidad2').value = data.disponibilidad;
+
+            document.getElementById('modal2').showModal();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 }

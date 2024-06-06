@@ -24,12 +24,27 @@
             <input type="search" name="" id="search" placeholder="Buscar por cedula de buscador">
         </div>
         <hr>
-        <button type="button" id="nuevaCita" class="botonNuevo" onclick="generarCitas()">
+        <button type="button" id="nuevaCita" class="botonNuevo" onclick="handleGenerarCitas()">
             <span class="material-symbols-outlined">
                 add_circle
             </span>
             Generar Citas
         </button>
+        <table id="citas-table">
+            <thead>
+            <tr>
+                <th>ID de cita</th>
+                <th>Buscador</th>
+                <th>Calificación del buscador</th>
+                <th>Postulante</th>
+                <th>Calificación del postulante</th>
+                <th>Calificación final</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Filas de datos se agregarán aquí dinámicamente -->
+            </tbody>
+        </table>
         <div id='calendar-container'>
             <div id='calendar'></div>
         </div>

@@ -5,6 +5,8 @@ import co.edu.udistrital.Citas.service.CitaService;
 import co.edu.udistrital.Citas.service.GeneracionService;
 import co.edu.udistrital.Citas.service.ParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,7 @@ public class CitasController {
 
     @GetMapping("/generar")
     public ResponseEntity<String> generarCitas() {
+        citaService.eliminarCitas();
         List<Cita> citas = generacionService.emparejarCitas(participanteService.obtenerBuscadores(), participanteService.obtenerPostulante());
         citas = generacionService.asignarHorarios(citas);
         citas = generacionService.calificarCitas(citas);
@@ -56,7 +59,7 @@ public class CitasController {
     public ResponseEntity<List<Cita>> listarPorCedulaBuscador(@PathVariable String cedulaBuscador){
         List<Cita> citas = citaService.listarPorCedulaBuscador(cedulaBuscador);
         if(citas.isEmpty()){
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return ResponseEntity.ok(citas);
     }

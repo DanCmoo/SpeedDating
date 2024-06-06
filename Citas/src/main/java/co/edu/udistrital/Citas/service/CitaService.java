@@ -9,4 +9,5 @@ public interface CitaService {
     List<Cita> listarPorCalificacion(String calificacion);
     List<Cita> listarPorCedulaBuscador(String cedulaBuscador);
     List<Cita> listar();
+    void eliminarCitas();
 }

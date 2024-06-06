@@ -16,6 +16,7 @@ import java.util.Random;
 
 @Service
 public class GeneracionServiceImpl implements GeneracionService {
+
     @Override
     public List<Cita> emparejarCitas(List<Buscador> buscadores, List<Postulante> postulantes) {
         List<Cita> citas = new ArrayList<>();

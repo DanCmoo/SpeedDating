@@ -8,4 +8,5 @@ import java.util.List;
 public interface CitaRepository extends JpaRepository<Cita, Long> {
     List<Cita> findByCalificacion(String calificacion);
     List<Cita> findByCedulaBuscador(String cedulaBuscador);
+    void deleteAll();
 }

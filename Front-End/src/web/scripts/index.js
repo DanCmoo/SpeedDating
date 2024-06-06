@@ -61,7 +61,7 @@ function enviarCorreo(){
                 .then(() => {
 
                 const calificacion = cita.calificacion;
-                if(calificacion == "No conexión"){
+                if(calificacion == "Amistad"){
                     enviarCorreoAmistad(formData);
                 }
                 if (calificacion == "Más que amistad"){

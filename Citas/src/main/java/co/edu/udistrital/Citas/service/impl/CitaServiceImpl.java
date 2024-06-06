@@ -4,6 +4,7 @@ import co.edu.udistrital.Citas.entity.Cita;
 import co.edu.udistrital.Citas.repository.CitaRepository;
 import co.edu.udistrital.Citas.service.CitaService;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +38,10 @@ public class CitaServiceImpl implements CitaService {
         return citaRepository.findAll();
     }
 
+    @Transactional
     @Override
     public void eliminarCitas() {
         citaRepository.deleteAll();
-        entityManager.createNativeQuery("ALTER TABLE tu_tabla AUTO_INCREMENT = 1").executeUpdate();
+        entityManager.createNativeQuery("ALTER TABLE citas AUTO_INCREMENT = 1").executeUpdate();
     }
 }

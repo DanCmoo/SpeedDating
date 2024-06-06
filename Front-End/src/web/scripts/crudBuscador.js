@@ -239,7 +239,12 @@ function eliminarBuscador(cedula){
 }
 
 function editarBuscador(cedula) {
-        fetch('http://localhost:8081/buscador/{cedula}')
+    fetch(`http://localhost:8081/buscador/${cedula}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -278,4 +283,3 @@ function editarBuscador(cedula) {
             console.error('Error:', error);
         });
     }
-}

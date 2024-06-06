@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", function() {
             modal.close();
         }
     });
+    document.getElementById('search').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            var cedula = event.target.value;
+            buscarBuscador(cedula);
+        }
+    });
 
 
 });
@@ -246,40 +252,100 @@ function editarBuscador(cedula) {
         }
     })
         .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Error al obtener los datos del buscador');
-            }
-        })
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Error al obtener los datos del buscador');
+        }
+    })
         .then(data => {
-            document.getElementById('name').value = data.nombre;
-            document.getElementById('lastname').value = data.apellido;
-            document.getElementById('cedula').value = data.cedula;
-            document.getElementById('edad').value = data.edad;
-            document.getElementById('estatura').value = data.estatura;
-            document.getElementById('p_o').value = data.profesion;
-            document.getElementById('contextura').value = data.contextura;
-            document.getElementById('estadoCivil').value = data.estado;
-            document.getElementById('genero').value = data.identidad;
-            document.getElementById('email').value = data.correo;
-            document.getElementById('telefono').value = data.telefono;
-            document.getElementById('gustoContextura').value = data.gustoContextura;
-            document.getElementById('gustoInteres').value = data.gustoInteres;
-            document.getElementById('gustoEstatura').value = data.gustoEstatura;
-            document.getElementById('gustoGenero').value = data.gustoIdentidad;
-            document.getElementById('gustoEdad').value = data.gustoEdad;
+        document.getElementById('name').value = data.nombre;
+        document.getElementById('lastname').value = data.apellido;
+        document.getElementById('cedula').value = data.cedula;
+        document.getElementById('edad').value = data.edad;
+        document.getElementById('estatura').value = data.estatura;
+        document.getElementById('p_o').value = data.profesion;
+        document.getElementById('contextura').value = data.contextura;
+        document.getElementById('estadoCivil').value = data.estado;
+        document.getElementById('genero').value = data.identidad;
+        document.getElementById('email').value = data.correo;
+        document.getElementById('telefono').value = data.telefono;
+        document.getElementById('gustoContextura').value = data.gustoContextura;
+        document.getElementById('gustoInteres').value = data.gustoInteres;
+        document.getElementById('gustoEstatura').value = data.gustoEstatura;
+        document.getElementById('gustoGenero').value = data.gustoIdentidad;
+        document.getElementById('gustoEdad').value = data.gustoEdad;
 
 
-            const form = document.getElementById('myForm');
-            form.dataset.editing = 'true';
-            form.dataset.cedula = data.cedula;
+        const form = document.getElementById('myForm');
+        form.dataset.editing = 'true';
+        form.dataset.cedula = data.cedula;
 
 
-            document.getElementById('modal').showModal();
-        })
+        document.getElementById('modal').showModal();
+    })
         .catch(error => {
 
-            console.error('Error:', error);
-        });
-    }
+        console.error('Error:', error);
+    });
+}
+function buscarBuscador(cedula) {
+    fetch(`http://localhost:8081/buscador/`+cedula, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+        if (response.ok) {
+            return response.json();
+        }else if(response.status ===404){
+            window.alert('No se han encontrado buscadores con la cedula suministrada');
+            return [];
+        } else {
+            throw new Error('Error al obtener los buscadores');
+        }
+    })
+        .then(data => {
+        const tbody = document.querySelector('#tablaBuscadores tbody');
+        tbody.innerHTML = '';
+        if(data.nombre !== undefined){
+            const row = document.createElement('tr');
+            let datoPago = "No";
+            if(data.pago){
+                datoPago = "Sí";
+            }
+            row.innerHTML = `
+                    <td>
+                                        <span class="material-symbols-outlined" onclick="editarBuscador(${data.cedula})">edit</span>
+                                        <span class="material-symbols-outlined" onclick="eliminarBuscador(${data.cedula})">delete</span>
+                                        <span class="material-symbols-outlined" onclick="verBuscador(${data.cedula})">visibility</span>
+                                    </td>
+                                    <td>${datoPago}</td>
+                                    <td>${data.nombre}</td>
+                                    <td>${data.apellido}</td>
+                                    <td>${data.cedula}</td>
+                                    <td>${data.edad}</td>
+                                    <td>${data.estatura}</td>
+                                    <td>${data.profesion}</td>
+                                    <td>${data.contextura}</td>
+                                    <td>${data.estado}</td>
+                                    <td>${data.identidad}</td>
+                                    <td>${data.correo}</td>
+                                    <td>${data.telefono}</td>
+                                    <td>${data.gustoContextura}</td>
+                                    <td>${data.gustoInteres}</td>
+                                    <td>${data.gustoEstatura}</td>
+                                    <td>${data.gustoIdentidad}</td>
+                                    <td>${data.gustoEdad}</td>
+                `;
+            tbody.appendChild(row);
+        }
+
+
+
+    })
+        .catch(error => {
+        console.error('Error:', error);
+    });
+}

@@ -20,6 +20,12 @@ document.addEventListener("DOMContentLoaded", function() {
             modal.close();
         }
     });
+    document.getElementById('search').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            var cedula = event.target.value;
+            buscarPostulante(cedula);
+        }
+    });
 
 
 
@@ -225,4 +231,62 @@ function eliminarPostulante(cedula){
         console.error('Hubo un problema con la solicitud:', error);
     });
 
+}
+function buscarPostulante(cedula) {
+    fetch(`http://localhost:8081/postulante/`+cedula, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else if(response.status === 404) {
+            window.alert('No se han encontrado postulantes con la cédula proporcionada');
+            return []; // Devuelve un array vacío si no se encuentra ningún postulante
+        } else {
+            throw new Error('Error al obtener los postulantes');
+        }
+    })
+        .then(data => {
+        const tbody = document.querySelector('#tablaPostulantes tbody');
+        tbody.innerHTML = '';
+        if (data.nombre !== undefined) {
+            const row = document.createElement('tr');
+            let datoPago = "No";
+            if (data.pago) {
+                datoPago = "Sí";
+            }
+            let datoDisponibilidad = "No";
+            if (data.disponibilidad) {
+                datoDisponibilidad = "Sí";
+            }
+            row.innerHTML = `
+                <td>
+                    <span class="material-symbols-outlined" onclick="editarPostulante(${data.cedula})">edit</span>
+                    <span class="material-symbols-outlined" onclick="eliminarPostulante(${data.cedula})">delete</span>
+                    <span class="material-symbols-outlined" onclick="verPostulante(${data.cedula})">visibility</span>
+                </td>
+                <td>${datoPago}</td>
+                <td>${data.nombre}</td>
+                <td>${data.apellido}</td>
+                <td>${data.cedula}</td>
+                <td>${data.edad}</td>
+                <td>${data.estatura}</td>
+                <td>${data.profesion}</td>
+                <td>${data.contextura}</td>
+                <td>${data.estado}</td>
+                <td>${data.identidad}</td>
+                <td>${data.correo}</td>
+                <td>${data.telefono}</td>
+                <td>${data.interes}</td>
+                <td>${datoDisponibilidad}</td>
+            `;
+            tbody.appendChild(row);
+        }
+    })
+        .catch(error => {
+        console.error('Error:', error);
+    });
 }

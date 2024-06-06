@@ -1,0 +1,60 @@
+@startuml
+
+package "config" {
+    class RestTemplateConfig {
+        - restTemplate: RestTemplate
+        + restTemplate(): RestTemplate
+    }
+
+    class WebConfig {
+        + addCorsMappings(CorsRegistry registry)
+    }
+}
+
+package "controllers" {
+    class PdfController {
+        - iCitaService: iCitaService
+        + generarPdf(): ResponseEntity<byte[]>
+    }
+}
+
+package "models" {
+    class Cita {
+        - buscador: String
+        - cedulaBuscador: String
+        - postulante: String
+        - cedulaPostulante: String
+        - calificacionBuscador: String
+        - calificacionPostulante: String
+        - calificacion: String
+        - fecha: String
+    }
+}
+
+package "services" {
+    class CitaServiceimpl {
+        - restTemplate: RestTemplate
+        + generatePdf(): ByteArrayInputStream
+    }
+
+    interface iCitaService {
+        + generatePdf(): ByteArrayInputStream
+    }
+}
+
+package "application" {
+    class PdfApplication {
+        + main(String[] args)
+    }
+}
+
+PdfApplication --> RestTemplateConfig
+PdfApplication --> WebConfig
+PdfApplication --> PdfController
+PdfController --> iCitaService
+PdfController --> Cita
+CitaServiceimpl --> RestTemplateConfig
+CitaServiceimpl --> iCitaService
+Cita --> CitaServiceimpl
+
+@enduml

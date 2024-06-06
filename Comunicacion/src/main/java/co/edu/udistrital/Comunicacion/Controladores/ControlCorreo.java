@@ -23,7 +23,7 @@ public class ControlCorreo {
 
     // Inyección de dependencia para el servicio de correo amor
     @Autowired
-    private ServicioCorreoAmor servicioCorreoAmor;
+    private ServicioCorreoAmor servicioCorreoAmorImpl;
 
     // Maneja las solicitudes POST a /comunicacion/correo
     /**
@@ -56,7 +56,7 @@ public class ControlCorreo {
     private ResponseEntity<String> sendEmailAmor(@RequestBody ModeloCorreo correo) {
         try {
             // Llama al servicio para enviar el correo de amor
-            servicioCorreoAmor.enviarCorreo(correo);
+            servicioCorreoAmorImpl.enviarCorreo(correo);
         } catch (MessagingException ex) {
             // Maneja la excepción en caso de error al enviar el correo
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo");

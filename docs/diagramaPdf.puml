@@ -32,9 +32,11 @@ package "models" {
 }
 
 package "services" {
-    class CitaServiceimpl {
-        - restTemplate: RestTemplate
-        + generatePdf(): ByteArrayInputStream
+    package impl{
+    class CitaServiceimpl implements iCitaService{
+            - restTemplate: RestTemplate
+            + generatePdf(): ByteArrayInputStream
+        }
     }
 
     interface iCitaService {
@@ -48,13 +50,11 @@ package "application" {
     }
 }
 
-PdfApplication --> RestTemplateConfig
+
 PdfApplication --> WebConfig
 PdfApplication --> PdfController
-PdfController --> iCitaService
-PdfController --> Cita
+PdfController --> CitaServiceimpl
 CitaServiceimpl --> RestTemplateConfig
-CitaServiceimpl --> iCitaService
-Cita --> CitaServiceimpl
+Cita <-- CitaServiceimpl
 
 @enduml

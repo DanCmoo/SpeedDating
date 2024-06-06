@@ -1,4 +1,7 @@
 @startuml
+class CitaApplication {
+  + main(String[] args)
+}
 
 package "config" {
 class RestTemplateConfig {
@@ -22,7 +25,7 @@ class CitasController {
 }
 
 package "entity" {
-    class Buscador {
+    class Buscador extends Persona{
         - gustoContextura: String
         - gustoInteres: String
         - gustoEstatura: float
@@ -54,7 +57,7 @@ package "entity" {
                 - telefono: String
                 - pago: boolean
             }
-    class Postulante {
+    class Postulante extends Persona{
             - interesPrincipal: String
             - disponibilidad: boolean
             - cedula: String
@@ -84,7 +87,7 @@ interface CitaRepository {
 
 package "services" {
     package "impl" {
-    class CitaServiceImpl {
+    class CitaServiceImpl implements CitaService{
             - citaRepository: CitaRepository
             - entityManager: EntityManager
             + crearCita(cita: Cita): void
@@ -93,12 +96,12 @@ package "services" {
             + listar(): List<Cita>
             + eliminarCitas(): void
         }
-        class GeneracionServiceImpl {
+        class GeneracionServiceImpl implements GeneracionService{
                     + emparejarCitas(buscadores: List<Buscador>, postulantes: List<Postulante>): List<Cita>
                     + calificarCitas(citas: List<Cita>): List<Cita>
                     + asignarHorarios(citas: List<Cita>): List<Cita>
                 }
-                class ParticipanteServiceImpl {
+                class ParticipanteServiceImpl implements ParticipanteService{
                         + obtenerBuscadores(): List<Buscador>
                         + obtenerPostulante(): List<Postulante>
                     }
@@ -120,11 +123,15 @@ package "services" {
             + obtenerPostulante(): List<Postulante>
         }
 }
-CitasController --> CitaService
-CitaService --> CitaRepository
+CitaApplication --> WebConfig
+CitaApplication --> CitasController
+CitasController --> CitaServiceImpl
+CitaServiceImpl --> Cita
+CitasController --> GeneracionServiceImpl
+CitasController --> ParticipanteServiceImpl
 CitaServiceImpl --> CitaRepository
 CitaServiceImpl --> EntityManager
-GeneracionServiceImpl --> ParticipanteService
 ParticipanteServiceImpl --> RestTemplateConfig
+
 
 @enduml

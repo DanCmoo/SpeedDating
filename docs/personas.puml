@@ -1,0 +1,120 @@
+@startuml
+
+class PersonasApplication {
+    +main(String[] args): void
+}
+
+package config {
+    class WebConfig {
+        +addCorsMappings(registry: CorsRegistry): void
+    }
+}
+
+package controller {
+    class BuscadorController {
+        -buscadorService: BuscadorService
+
+        +consultarBuscador(cedula: String): ResponseEntity<Buscador>
+        +registrarBuscador(buscador: Buscador): ResponseEntity<String>
+        +actualizarBuscador(cedula: String, buscadorActualizado: Buscador): ResponseEntity<String>
+        +eliminarBuscador(cedula: String): ResponseEntity<String>
+        +listar(): ResponseEntity<List<Buscador>>
+        +listarPorCriterio(criterio: String, estatura: float): ResponseEntity<List<Buscador>>
+    }
+    class PostulanteController {
+        -postulanteService: PostulanteService
+
+        +consultarPostulante(cedula: String): ResponseEntity<Postulante>
+        +registrarPostulante(postulante: Postulante): ResponseEntity<String>
+        +actualizarPostulante(cedula: String, postulanteActualizado: Postulante): ResponseEntity<String>
+        +eliminarPostulante(cedula: String): ResponseEntity<String>
+        +listarPostulantes(): List<Postulante>
+    }
+
+}
+
+package entity {
+    class Buscador extends Persona {
+        -gustoContextura: String
+        -gustoInteres: String
+        -gustoEstatura: float
+        -gustoIdentidad: String
+        -gustoEdad: int
+    }
+    class Postulante extends Persona {
+        -interes: String
+        -disponibilidad: boolean
+    }
+    class Persona {
+        -cedula: String
+        -nombre: String
+        -apellido: String
+        -edad: int
+        -estatura: float
+        -profesion: String
+        -contextura: String
+        -estado: String
+        -identidad: String
+        -correo: String
+        -telefono: String
+        -pago: boolean
+    }
+}
+
+package repository {
+    interface BuscadorRepository {
+        +findByEstatura(estatura: float): List<Buscador>
+    }
+    interface PostulanteRepository {
+    }
+}
+
+package service {
+    package impl{
+        class BuscadorServiceImpl implements BuscadorService{
+            - buscadorRepository: BuscadorRepository
+            + crearBuscador(buscador: Buscador): void
+            + consultarBuscador(cedula: String): Buscador
+            + actualizarBuscador(cedula: String, buscador: Buscador): void
+            + eliminarBuscador(cedula: String): boolean
+            + listar(): List<Buscador>
+            + listarPorEstatura(estatura: float): List<Buscador>
+        }
+        class PostulanteServiceImpl implements PostulanteService{
+            - postulanteRepository: PostulanteRepository
+            + crearPostulante(postulante: Postulante): void
+            + consultarPostulante(cedula: String): Postulante
+            + actualizarPostulante(cedula: String, postulante: Postulante): void
+            + eliminarPostulante(cedula: String): boolean
+            + listar(): List<Postulante>
+        }
+}
+    interface BuscadorService {
+        +crearBuscador(buscador: Buscador): void
+        +consultarBuscador(cedula: String): Buscador
+        +actualizarBuscador(cedula: String, buscador: Buscador): void
+        +eliminarBuscador(cedula: String): boolean
+        +listar(): List<Buscador>
+        +listarPorEstatura(estatura: float): List<Buscador>
+    }
+    interface PostulanteService {
+        +crearPostulante(postulante: Postulante): void
+        +consultarPostulante(cedula: String): Postulante
+        +actualizarPostulante(cedula: String, postulante: Postulante): void
+        +eliminarPostulante(cedula: String): boolean
+        +listar(): List<Postulante>
+    }
+
+}
+
+
+PersonasApplication --> WebConfig
+PersonasApplication --> BuscadorController
+PersonasApplication --> PostulanteController
+PostulanteController --> PostulanteServiceImpl
+BuscadorController --> BuscadorServiceImpl
+PostulanteServiceImpl --> PostulanteRepository
+BuscadorServiceImpl --> BuscadorRepository
+PostulanteServiceImpl--> Postulante
+BuscadorServiceImpl --> Buscador
+@enduml

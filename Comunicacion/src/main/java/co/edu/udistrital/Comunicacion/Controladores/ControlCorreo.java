@@ -13,34 +13,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// Indica que esta clase es un controlador REST de Spring
 @RestController
+// Define el mapeo base para las solicitudes HTTP
 @RequestMapping("/comunicacion")
 public class ControlCorreo {
+
+    // Inyección de dependencia para el servicio de correo estándar
     @Autowired
     private ServicioCorreoimpl servicioCorreo;
+
+    // Inyección de dependencia para el servicio de correo amor
     @Autowired
     private ServicioCorreoAmor servicioCorreoAmor;
 
+    // Maneja las solicitudes POST a /comunicacion/correo
     @PostMapping("/correo")
-    private ResponseEntity<String> sendEmail(@RequestBody ModeloCorreo correo){
-        try{
+    private ResponseEntity<String> sendEmail(@RequestBody ModeloCorreo correo) {
+        try {
+            // Llama al servicio para enviar el correo estándar
             servicioCorreo.enviarCorreo(correo);
-        }catch (MessagingException ex){
+        } catch (MessagingException ex) {
+            // Maneja la excepción en caso de error al enviar el correo
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo");
         }
 
+        // Retorna una respuesta exitosa si el correo se envió correctamente
         return ResponseEntity.ok("Correo enviado correctamente");
-
     }
+
+    // Maneja las solicitudes POST a /comunicacion/correoAmor
     @PostMapping("/correoAmor")
-    private ResponseEntity<String> sendEmailAmor(@RequestBody ModeloCorreo correo){
-        try{
+    private ResponseEntity<String> sendEmailAmor(@RequestBody ModeloCorreo correo) {
+        try {
+            // Llama al servicio para enviar el correo de amor
             servicioCorreoAmor.enviarCorreo(correo);
-        }catch (MessagingException ex){
+        } catch (MessagingException ex) {
+            // Maneja la excepción en caso de error al enviar el correo
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar el correo");
         }
 
+        // Retorna una respuesta exitosa si el correo se envió correctamente
         return ResponseEntity.ok("Correo enviado correctamente");
-
     }
 }
+

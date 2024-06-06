@@ -70,17 +70,47 @@ nav .menu_horizontal li a:hover, nav .menu_horizontal li:hover > a {
     border-radius: 2px;
 }
 
+
 .menu_vertical{
     position: absolute;
     display: none;
     list-style: none;
-    width: 100%; /* Ajustar según sea necesario */
-    background-color: white; /* Corregir error de propiedad */
+    width: 100%;
+    background-color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 0;
     margin: 0;
-    top: 100%; /* Alinea el menú vertical debajo del menú horizontal */
-    left: 0; /* Alinea el menú vertical con el borde izquierdo del elemento principal */
+    top: 100%;
+    left: 0;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: start;
+    gap: 10px; /
+}
+
+.botonNuevo {
+    background-color: #e3067d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.botonNuevo:hover {
+    background-color: #f3acce;
 }
 
 .menu_horizontal li:hover .menu_vertical{
